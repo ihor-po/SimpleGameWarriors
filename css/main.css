@@ -1,0 +1,164 @@
+body, html {
+    width: 100%;
+    height: 100vh;
+    background-color: #c2c2c2;
+}
+.main-container {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -webkit-flex-flow: column nowrap;
+    flex-flow: column nowrap;
+    width: 100%;
+    height: auto;
+}
+.header {
+    width: 100%;
+    height: 6rem;
+    border-bottom: 1px solid #3e628e;
+    background-color: #87a0bf;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -webkit-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+}
+.conteiner--center {
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+.conteiner--space-around {
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+}
+.conteiner--space-between {
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+.container--align-items-center {
+    -webkit-align-items: center;
+    align-items: center;
+}
+.header__title {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+}
+.header__title--left15 {
+    margin-left: 1.5rem;
+}
+.header__title--right15 {
+    margin-right: 1.5rem;
+}
+main {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -webkit-flex-flow: column nowrap;
+    flex-flow: column nowrap;
+    height: 100%;
+}
+.section-button {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -webkit-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+    width: 100%;
+    min-height: 4rem;
+    height: 20%;
+    margin-top: 1rem;
+}
+.section-button__button {
+    padding: 0.75rem 1rem;
+    border: 1px solid #3e628e;
+    background-color: #87a0bf;
+    border-radius: 0.3125rem;
+    letter-spacing: 1px;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+.section-button__button:hover {
+    background-color: #3e628e;
+    cursor: pointer;
+    color: #ffffff;
+}
+.section-fight {
+    width: 100%;
+    min-height: 15rem;
+    height: 35rem;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -webkit-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+    margin-top: 1rem;
+}
+.section-result {
+    width: 100%;
+    min-height: 4rem;
+    height: 20%;
+}
+.section-fight__armies {
+    width: 25rem;
+    height: 100%;
+    border: 1px solid #dddddd;
+    border-radius: 0.375rem;
+}
+.section-fight__armies--freind {
+    border-color: green;
+    background-color: rgba(0, 128, 0, 0.3);
+}
+.section-fight__armies--enemy {
+    border-color: red;
+    background-color: rgba(128, 0, 0, 0.3);
+}
+.section-fight__armies__hero {
+    width: 100%;
+    height: 5rem;
+    border-bottom: 1px solid #008000;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -webkit-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+    padding: 0 1rem;
+}
+.fight__armies__hero--green {
+    border-bottom: 1px solid #008000;
+}
+.fight__armies__hero--red {
+    border-bottom: 1px solid #800000;
+}
+.fight__armies__hero__fio {
+    font-size: 2rem;
+}
+.fight__armies__hero__fio--green {
+    color: #004c00;
+}
+.fight__armies__hero__fio--red {
+    color: #4c0000;
+}
+.fight__armies__hero__level {
+    font-size: 3rem;  
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+}
+.fight__armies__hero__level--green {
+    background-color: rgba(0, 76, 0, 0.7);
+    color: #00c500;  
+}
+.fight__armies__hero__level--red {
+    background-color: rgba(76, 0, 0, 0.7);
+    color: #c50000;  
+}
+.section-fight__armies__army {
+    width: 100%;
+    height: 85%;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -webkit-flex-flow: column nowrap;
+    flex-flow: column nowrap;
+    padding: 0 1rem;
+    font-size: 1.5rem;
+}
