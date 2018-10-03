@@ -3,10 +3,11 @@
 class Hero extends Human {
 
 	constructor(newLevel, newArmyStrength) {
-		super();										//вызов родительского конструктора
+		super(true);									//вызов родительского конструктора
     	this.Level = newLevel;							//присвоение уровня
     	this.ArmyStrength = newArmyStrength; 			//численность войска
-    	this.PowerIndex = newLevel * newArmyStrength;
+    	this.PowerIndex = newLevel * newArmyStrength;	//Индекс силы героя
+    	this.HerosArmy =[];								//армия героя
  	 }
 
  	 MyName() { return super.MyName() }
@@ -27,10 +28,14 @@ class Hero extends Human {
 
  	 //поднятие уровня
  	 levelUp() { 
- 	 	this.Level++;
- 	 	this.updatePowerIndex(); 
+ 	 	if (this.Level < MAX_HERO_LEVEL) 
+ 	 	{
+ 	 		this.Level++;
+ 	 		this.updatePowerIndex(); 
+ 	 	}
  	 }
 
+ 	 //атака врага
  	 atack(enemy)
  	 {
  	 	if (this.PowerIndex > enemy.PowerIndex)
@@ -44,6 +49,14 @@ class Hero extends Human {
  	 	else
  	 	{
  	 		return -1;
+ 	 	}
+ 	 }
+
+ 	 //Добавление нового воина в войско
+ 	 addNewWarrior(newWarrior) {
+ 	 	if (this.HerosArmy.length < this.ArmyStrength)
+ 	 	{
+ 	 		this.HerosArmy.push(newWarrior);
  	 	}
  	 }
 }

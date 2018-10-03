@@ -2,8 +2,18 @@
 
 class Human {
 	
-	constructor() {
-		let newName = getNewName(randomNumber(0, NAMES_COUNT - 1));
+	constructor(isHero) {
+		let newName;
+
+		if (isHero)
+		{
+			newName = getNewHeroName(randomNumber(0, NAMES_COUNT - 1));
+		}
+		else
+		{
+			newName = getNewWarriorName(randomNumber(0, NAMES_COUNT - 1));
+		}
+		
     	this.Name = newName;
  	 }
 
