@@ -13,20 +13,7 @@ let warriorNames = ['Святослав', 'Доброжир', 'Тихомир', 
 let warriorType = ['Воин', 'Лучник', 'Маг', 'Мифическое существо'];
 
 
-let friendDiv = document.getElementById('friend');
-let enemyDiv = document.getElementById('enemy');
-
-let friendHeroName = document.getElementById('friendHeroName');
-let enemyHeroName = document.getElementById('enemyHeroName');
-
-let friendHeroPowerIndex = document.getElementById('friendHeroPowerIndex');
-let enemyHeroPowerIndex = document.getElementById('enemyHeroPowerIndex');
-
-let friendHeroLevel = document.getElementById('friendHeroLevel');
-let enemyHeroLevel = document.getElementById('enemyHeroLevel');
-
-let friendHeroArmyInfo = document.getElementById('friendArmyInfo');
-let enemyHeroArmyInfo = document.getElementById('enemyArmyInfo');
+let fightBtn = document.getElementById('fight-btn');
 
 
 //Получение случайного числа

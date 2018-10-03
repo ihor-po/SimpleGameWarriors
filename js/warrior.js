@@ -2,10 +2,11 @@
 
 class Warrior extends Human {
 
-	constructor(newLevel, newWarriorType) {
+	constructor(newLevel, newWarriorType, hero) {
 		super(false);									//вызов родительского конструктора
     	this.Level = newLevel;							//присвоение уровня
-    	this.Type = getNewWarriorType(newWarriorType); 					//тип воина
+    	this.Type = getNewWarriorType(newWarriorType);	//тип воина
+    	this.follow(hero); 								//Следовать за героем
  	 }
 
  	 MyName() { return super.MyName() }
