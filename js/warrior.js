@@ -18,7 +18,12 @@ class Warrior extends Human {
 
  	 //Получение полной информации о воине
  	 warriorInfo() {
- 	 	return '${this.MyName()} ${this.Type} ${this.Level}';
+ 	 	return `${this.MyName()} ${this.Type} ${this.Level}`;
+ 	 }
+
+ 	 //Получение полной информации о воине для вывода на странице
+  	 warriorHtmlInfo() {
+ 	 	return `<span class="text--bold">${this.MyName()}</span> <span class="text--italic">${this.Type}</span> <span class="level-information">${this.Level}</span>`;
  	 }
 
  	 //поднятие уровня

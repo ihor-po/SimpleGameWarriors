@@ -7,9 +7,27 @@ const MAX_WARRIOR_TYPE = 4;
 const MAX_HERO_LEVEL = 99;
 const MAX_WARRIOR_LEVEL = 150;
 
+
 let names = ['Перун', 'Хорс', 'Дажьбог', 'Стрибог', 'Семаргл', 'Мокошь', 'Велес', 'Рожаницы и Род', 'Сварог', 'Сварожич'];
 let warriorNames = ['Святослав', 'Доброжир', 'Тихомир', 'Ратибор', 'Ярополк', 'Гостомысл', 'Велимудр', 'Всеволод', 'Любомила', 'Доброгнева'];
 let warriorType = ['Воин', 'Лучник', 'Маг', 'Мифическое существо'];
+
+
+let friendDiv = document.getElementById('friend');
+let enemyDiv = document.getElementById('enemy');
+
+let friendHeroName = document.getElementById('friendHeroName');
+let enemyHeroName = document.getElementById('enemyHeroName');
+
+let friendHeroPowerIndex = document.getElementById('friendHeroPowerIndex');
+let enemyHeroPowerIndex = document.getElementById('enemyHeroPowerIndex');
+
+let friendHeroLevel = document.getElementById('friendHeroLevel');
+let enemyHeroLevel = document.getElementById('enemyHeroLevel');
+
+let friendHeroArmyInfo = document.getElementById('friendArmyInfo');
+let enemyHeroArmyInfo = document.getElementById('enemyArmyInfo');
+
 
 //Получение случайного числа
 function randomNumber(min, max) {

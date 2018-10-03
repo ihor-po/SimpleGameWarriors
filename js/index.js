@@ -1,21 +1,28 @@
 'use strict'
 
-let friendDiv = document.getElementById('friend');
-let enemyDiv = document.getElementById('enemy');
-
-let friendHeroName = document.getElementById('friendHeroName');
-let enemyHeroName = document.getElementById('enemyHeroName');
-
 let friendHero = createHero();	//cоздание дружественного героя
 let enemyHero = createHero();	//cоздание вражеского героя
 
-//Изменение имени героя
+//Создание армии героя
+createHeroArmy(friendHero);
+createHeroArmy(enemyHero);
+
+//Отображение имени героя
 friendHeroName.firstChild.nodeValue = friendHero.MyName();
 enemyHeroName.firstChild.nodeValue = enemyHero.MyName();
 
-//Создание армии героя
-createHeroArmy(friendHero);
-createHeroArmy(enemyHeroName);
+//Отображение индекса силы
+friendHeroPowerIndex.innerHTML = friendHero.PowerIndex;
+enemyHeroPowerIndex.innerHTML = enemyHero.PowerIndex;
+
+//Отображение уровня героя
+friendHeroLevel.firstChild.nodeValue = friendHero.Level;
+enemyHeroLevel.firstChild.nodeValue = enemyHero.Level;
+
+//Отображение армии героя
+friendHeroArmyInfo.innerHTML = getHeroArmyInfo(friendHero);
+enemyHeroArmyInfo.innerHTML = getHeroArmyInfo(enemyHero);
+
 
 
 
@@ -60,5 +67,12 @@ function createHeroArmy(hero) {
 	}
 }
 
-//Создание 
+//Создание информации о войске
+function getHeroArmyInfo(hero) {
+	let info = '';
+	hero.HerosArmy.forEach(function(warrior) {
+		info += '<p>' + warrior.warriorHtmlInfo() + '</p>'; 
+	});
+	return info;
+}
 
