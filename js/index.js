@@ -109,6 +109,7 @@ function playAgain()
 {
 	fightBtn.style.display = 'block';
 	playAgainBtn.style.display = 'none';
+	newGameBtn.style.display = 'none';
 
 	if (isEnemy)
 	{
