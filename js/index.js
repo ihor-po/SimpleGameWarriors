@@ -1,5 +1,7 @@
 'use strict'
 
+let isEnemy = false; //флаг для создания героя при повторной игре
+
 let friendDiv = document.getElementById('friend');
 let enemyDiv = document.getElementById('enemy');
 
@@ -15,20 +17,10 @@ let enemyHeroLevel = document.getElementById('enemyHeroLevel');
 let friendHeroArmyInfo = document.getElementById('friendArmyInfo');
 let enemyHeroArmyInfo = document.getElementById('enemyArmyInfo');
 
-let friendHero = createHero();	//cоздание дружественного героя
-let enemyHero = createHero();	//cоздание вражеского героя
+let friendHero;
+let enemyHero;
 
-//Создание армии героя
-createHeroArmy(friendHero);
-createHeroArmy(enemyHero);
-
-//Отображение имени героя
-friendHeroName.firstChild.nodeValue = friendHero.MyName();
-enemyHeroName.firstChild.nodeValue = enemyHero.MyName();
-
-//Вывод информации о герое и его войска
-fillHeroInfo(friendHero, false);
-fillHeroInfo(enemyHero, true);
+newGame();
 
 //Создание героя
 function createHero() {
@@ -85,15 +77,21 @@ function fillHeroInfo(hero, isEnemy)
 
 //Сражение героев
 function LetsDance() {
+	fightBtn.style.display = 'none';
+	playAgainBtn.style.display = 'block';
+	newGameBtn.style.display = 'block';
+
 	switch(friendHero.atack(enemyHero))
 	{
 		case 1:
+			isEnemy = true;
 			enemy.style.display = 'none';
 			friendHero.levelUp();
 			heroArmyLevelUp(friendHero);
 			fillHeroInfo(friendHero, false);
 			break;
 		case 0:
+			isEnemy = false;
 			friend.style.display = 'none';
 			enemyHero.levelUp();
 			heroArmyLevelUp(enemyHero);
@@ -104,4 +102,53 @@ function LetsDance() {
 			enemyDiv.style.display = 'none';
 			break;		
 	}
+}
+
+//Сыграть еще раз
+function playAgain()
+{
+	fightBtn.style.display = 'block';
+	playAgainBtn.style.display = 'none';
+
+	if (isEnemy)
+	{
+		enemyHero = createHero();;
+		createHeroArmy(enemyHero);
+		enemyHeroName.firstChild.nodeValue = enemyHero.MyName();
+		fillHeroInfo(enemyHero, true);
+		enemyDiv.style.display = 'block';
+	}
+	else
+	{
+		friendHero = createHero();
+		createHeroArmy(friendHero);
+		friendHeroName.firstChild.nodeValue = friendHero.MyName();
+		fillHeroInfo(friendHero, false);
+		friendDiv.style.display = 'block';
+	}
+}
+
+//Новая игра
+function newGame() 
+{
+	playAgainBtn.style.display = 'none';
+	newGameBtn.style.display = 'none';
+
+	friend.style.display = 'block';
+	enemy.style.display = 'block';
+
+	friendHero = createHero();	//cоздание дружественного героя
+	enemyHero = createHero();	//cоздание вражеского героя
+
+	//Создание армии героя
+	createHeroArmy(friendHero);
+	createHeroArmy(enemyHero);
+
+	//Отображение имени героя
+	friendHeroName.firstChild.nodeValue = friendHero.MyName();
+	enemyHeroName.firstChild.nodeValue = enemyHero.MyName();
+
+	//Вывод информации о герое и его войска
+	fillHeroInfo(friendHero, false);
+	fillHeroInfo(enemyHero, true);
 }

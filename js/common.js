@@ -14,7 +14,8 @@ let warriorType = ['Воин', 'Лучник', 'Маг', 'Мифическое �
 
 
 let fightBtn = document.getElementById('fight-btn');
-
+let playAgainBtn = document.getElementById('playAgain-btn');
+let newGameBtn = document.getElementById('newGame-btn');
 
 //Получение случайного числа
 function randomNumber(min, max) {
