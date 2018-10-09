@@ -12,31 +12,44 @@
 	<div class="main-container">
 		<div class="header conteiner--space-between container--align-items-center">
 			<h1 class="header__title header__title--left15">W</h1>
-			<h1 class="header__title header__title--right15">Warriors</h1>
-		</div>
-		<main>
 			<div class="section-button conteiner--center container--align-items-center">
 				<a class="section-button__button" id="fight-btn" onclick="LetsDance()">Сразиться</a>
 				<a class="section-button__button" id="playAgain-btn" onclick="playAgain()">Продолжить этим героем</a>
 				<a class="section-button__button" id="newGame-btn" onclick="newGame()">Новая игря</a>
 			</div>
+			<h1 class="header__title header__title--right15">Warriors</h1>
+		</div>
+		<main>
+<!-- 			<div class="section-button conteiner--center container--align-items-center">
+				<a class="section-button__button" id="fight-btn" onclick="LetsDance()">Сразиться</a>
+				<a class="section-button__button" id="playAgain-btn" onclick="playAgain()">Продолжить этим героем</a>
+				<a class="section-button__button" id="newGame-btn" onclick="newGame()">Новая игря</a>
+			</div> -->
 			<div class="section-fight conteiner--space-around">
-				<div class="section-fight__armies section-fight__armies--freind" id="friend">
+				<div class="section-fight__hero-army-info" id="friendHeroArmyInfo"></div>
+				<div class="section-fight__field">
+					<div class="section-fight__field__friend-hero-side" id="friendSide"></div>
+					<div class="section-fight__field__enemy-hero-side" id="enemySide"></div>
+				</div>
+
+<!-- 				<div class="section-fight__armies section-fight__armies--freind" id="friend">
 					<div class="section-fight__armies__hero fight__armies__hero--green conteiner--space-between container--align-items-center">
 						<h3 class="fight__armies__hero__fio fight__armies__hero__fio--green" id="friendHeroName">Герой</h3>
 						<h3 class="fight__armies__hero__fio fight__armies__hero__fio--green" id="friendHeroPowerIndex"></h3>
 						<h2 class="fight__armies__hero__level fight__armies__hero__level--green" id="friendHeroLevel">0</h2>
 					</div>
 					<div class="section-fight__armies__army conteiner--space-around" id="friendArmyInfo"></div>
-				</div>
-				<div class="section-fight__armies section-fight__armies--enemy" id="enemy">
+				</div> -->
+<!-- 				<div class="section-fight__armies section-fight__armies--enemy" id="enemy">
 					<div class="section-fight__armies__hero fight__armies__hero--red conteiner--space-between container--align-items-center">
 						<h3 class="fight__armies__hero__fio fight__armies__hero__fio--red" id="enemyHeroName">Герой</h3>
 						<h3 class="fight__armies__hero__fio fight__armies__hero__fio--red" id="enemyHeroPowerIndex"></h3>
 						<h2 class="fight__armies__hero__level fight__armies__hero__level--red" id="enemyHeroLevel">0</h2>
 					</div>
 					<div class="section-fight__armies__army conteiner--space-around" id="enemyArmyInfo" id="enemyHeroLevel"></div>					
-				</div>
+				</div> -->
+				<div class="section-fight__hero-army-info" id="enemyHeroArmyInfo"></div>
+				
 			</div>
 			<div class="section-result">
 

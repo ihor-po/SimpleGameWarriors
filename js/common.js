@@ -6,11 +6,18 @@ const MAX_ARMY_STRENGTH = 10;
 const MAX_WARRIOR_TYPE = 4;
 const MAX_HERO_LEVEL = 99;
 const MAX_WARRIOR_LEVEL = 150;
+const MAX_HEROS_SKINS = 4;
 
 
 let names = ['Перун', 'Хорс', 'Дажьбог', 'Стрибог', 'Семаргл', 'Мокошь', 'Велес', 'Рожаницы и Род', 'Сварог', 'Сварожич'];
 let warriorNames = ['Святослав', 'Доброжир', 'Тихомир', 'Ратибор', 'Ярополк', 'Гостомысл', 'Велимудр', 'Всеволод', 'Любомила', 'Доброгнева'];
 let warriorType = ['Воин', 'Лучник', 'Маг', 'Мифическое существо'];
+let herosSkins = [
+	'../img/hero_1_web.png',
+	'../img/hero_2_web.png',
+	'../img/hero_3_web.png',
+	'../img/hero_4_web.png',
+];
 
 
 let fightBtn = document.getElementById('fight-btn');
@@ -36,3 +43,5 @@ function getNewWarriorName(i)  { return warriorNames[i]; }
 
 //Получение типа воина
 function getNewWarriorType(i)  { return warriorType[i]; }
+
+function getHeroSkin(i) { return herosSkins[i]; }

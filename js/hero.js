@@ -2,12 +2,13 @@
 
 class Hero extends Human {
 
-	constructor(newLevel, newArmyStrength) {
+	constructor(newLevel, newArmyStrength, skin) {
 		super(true);									//вызов родительского конструктора
     	this.Level = newLevel;							//присвоение уровня
     	this.ArmyStrength = newArmyStrength; 			//численность войска
     	this.PowerIndex = newLevel * newArmyStrength;	//Индекс силы героя
     	this.HerosArmy =[];								//армия героя
+    	this.Skin = skin;								//картинка героя
  	 }
 
  	 MyName() { return super.MyName() }
@@ -20,6 +21,9 @@ class Hero extends Human {
 
  	 get PowerIndex() { return this._PowerIndex; }
  	 set PowerIndex(newPowerIndex) { this._PowerIndex = newPowerIndex }
+
+ 	 get Skin() { return this._Skin; }
+ 	 set Skin(skin) { this._Skin = skin }
 
  	 //изменеие индекса силы
  	 updatePowerIndex() { 

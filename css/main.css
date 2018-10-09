@@ -55,7 +55,9 @@ main {
     display: flex;
     -webkit-flex-flow: column nowrap;
     flex-flow: column nowrap;
+    min-height: calc(100vh - 6rem);
     height: 100%;
+    padding: 1rem;
 }
 .section-button {
     display: -webkit-flex;
@@ -66,7 +68,7 @@ main {
     width: 100%;
     min-height: 4rem;
     height: 20%;
-    margin-top: 1rem;
+    margin-left: 11rem;
 }
 .section-button__button {
     margin: 0 1rem;
@@ -85,14 +87,39 @@ main {
 }
 .section-fight {
     width: 100%;
-    min-height: 15rem;
-    height: 35rem;
+    min-height: calc(100vh - 8rem);
+    height: 100%;
+    /*height: 35rem;*/
     display: -webkit-flex;
     display: -moz-flex;
     display: flex;
     -webkit-flex-flow: row nowrap;
     flex-flow: row nowrap;
-    margin-top: 1rem;
+    /*margin-top: 1rem;*/
+    border: 1px solid #000000;
+    border-radius: 0.3125rem;
+}
+.section-fight__hero-army-info {
+    width: 15%;
+    height: 10rem;
+    background-color: green;
+}
+.section-fight__field {
+    width: 70%;
+    height:30rem;
+    display:inline-flex;
+    background-color: white;
+}
+.section-fight__field__friend-hero-side, .section-fight__field__enemy-hero-side {
+    width: 50%;
+    height: 100%;
+    /*height: 20rem;*/
+}
+.section-fight__field__enemy-hero-side {
+    background-color: rgba(128, 0, 0, 0.2);
+}
+.section-fight__field__friend-hero-side {
+    background-color: rgba(0, 128, 0, 0.2);
 }
 .section-result {
     width: 100%;

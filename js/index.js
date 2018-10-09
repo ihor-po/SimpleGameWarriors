@@ -14,11 +14,14 @@ let enemyHeroPowerIndex = document.getElementById('enemyHeroPowerIndex');
 let friendHeroLevel = document.getElementById('friendHeroLevel');
 let enemyHeroLevel = document.getElementById('enemyHeroLevel');
 
-let friendHeroArmyInfo = document.getElementById('friendArmyInfo');
-let enemyHeroArmyInfo = document.getElementById('enemyArmyInfo');
+let friendHeroArmyInfo = document.getElementById('friendHeroArmyInfo'); //+
+let enemyHeroArmyInfo = document.getElementById('enemyHeroArmyInfo'); //+
 
-let friendHero;
-let enemyHero;
+let friendSide = document.getElementById('friendSide'); //+
+let enemySide = document.getElementById('enemySide'); //+
+
+let friendHero = null; //+
+let enemyHero = null; //+
 
 newGame();
 
@@ -26,7 +29,8 @@ newGame();
 function createHero() {
 	let newLevel = randomNumber(0, MAX_HERO_LEVEL - 10);
 	let newArmyStrength = randomNumber(MIN_ARMY_STRENGTH, MAX_ARMY_STRENGTH);
-	return new Hero(newLevel, newArmyStrength);
+	let skin = getHeroSkin(randomNumber(0, MAX_HEROS_SKINS - 1));
+	return new Hero(newLevel, newArmyStrength, skin);
 }
 
 //Создание воина
@@ -65,13 +69,15 @@ function fillHeroInfo(hero, isEnemy)
 	{
 		enemyHeroPowerIndex.innerHTML = hero.PowerIndex;
 		enemyHeroLevel.firstChild.nodeValue = hero.Level;
-		enemyHeroArmyInfo.innerHTML = getHeroArmyInfo(hero);
+		enemyHeroArmyInfo.innerHTML = '<img src="' + hero.Skin + '" style="width: 60%; height: auto;">';
+		enemyHeroArmyInfo.innerHTML += getHeroArmyInfo(hero);
 	}
 	else
 	{
 		friendHeroPowerIndex.innerHTML = hero.PowerIndex;
 		friendHeroLevel.firstChild.nodeValue = hero.Level;
-		friendHeroArmyInfo.innerHTML = getHeroArmyInfo(hero);
+		friendHeroArmyInfo.innerHTML = '<img src="' + hero.Skin + '" style="width: 60%; height: auto;">';
+		friendHeroArmyInfo.innerHTML += getHeroArmyInfo(hero);
 	}
 }
 
