@@ -106,7 +106,8 @@ main {
 }
 .section-fight__field {
     width: 70%;
-    height:30rem;
+    /*height:30rem;*/
+    height: auto;
     display:inline-flex;
     background-color: white;
 }
