@@ -29,31 +29,25 @@ let enemyHero = null; //+
 *
 */
 
-friendSide.addEventListener('contextmenu', function(e, isEnemy = false) {showMenu(e, friendHero, isEnemy); return false} );
-enemySide.addEventListener('contextmenu', function(e, isEnemy = true) {showMenu(e, enemyHero, isEnemy); return false} );
+friendSide.addEventListener('contextmenu', function(e, isEnemy = false) { showMenu(e, friendHero, isEnemy); } );
+enemySide.addEventListener('contextmenu', function(e, isEnemy = true) { showMenu(e, enemyHero, isEnemy); } );
+fightSection.addEventListener('click', function() { hideRightMenu() } );
 /* ========================================================================= */
+
+rightMenu.style.display = 'none';
 
 //Для отображения своего меню
 function showMenu(e, hero, isEnemy)
 {
 	e.preventDefault(); //для отмены показа стандартного меню
-console.log(e);
 
-	if (isEnemy)
+	if (e.target == friendSide)
 	{
-		if (hero == null)
-		{
-			hero = createHero(e);
-		}
-		else
-		{
-
-		}
-		console.log('enemy');
+		showRightMenu(e.pageX, e.pageY, 'Дружуственная');
 	}
-	else
+	else if (e.target == enemySide)
 	{
-		console.log('friend');
+		showRightMenu(e.pageX, e.pageY, 'Вражеская');
 	}
 }
 
@@ -63,7 +57,7 @@ function createHero(e) {
 	let newArmyStrength = randomNumber(MIN_ARMY_STRENGTH, MAX_ARMY_STRENGTH);
 	let skin = getHeroSkin(randomNumber(0, MAX_HEROS_SKINS - 1));
 
-	enemySide.innerHTML = '<img src="' + skin + '" style="width: 10%; height: auto;left:' + e.pageX + 'px;top:' + e.pageY + 'px;position: absolute;">';
+	//enemySide.innerHTML = '<img src="' + skin + '" style="width: 10%; height: auto;left:' + e.pageX + 'px;top:' + e.pageY + 'px;position: absolute;">';
 
 	//return new Hero(newLevel, newArmyStrength, skin);
 }

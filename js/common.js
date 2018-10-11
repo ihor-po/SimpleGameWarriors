@@ -24,6 +24,11 @@ let fightBtn = document.getElementById('fight-btn');
 let playAgainBtn = document.getElementById('playAgain-btn');
 let newGameBtn = document.getElementById('newGame-btn');
 
+let fightSection = document.getElementById('fightSection');//+
+let rightMenu = document.getElementById('right-menu');//+
+let owner = document.getElementById('owner');//+
+
+
 //Получение случайного числа
 function randomNumber(min, max) {
     let rand = min - 0.5 + Math.random() * (max - min + 1)
@@ -44,4 +49,19 @@ function getNewWarriorName(i)  { return warriorNames[i]; }
 //Получение типа воина
 function getNewWarriorType(i)  { return warriorType[i]; }
 
+//Получение картинки героя
 function getHeroSkin(i) { return herosSkins[i]; }
+
+//Отображение контекстного меню
+function showRightMenu(X, Y, title) { 
+    rightMenu.style.left = X + 'px';
+    rightMenu.style.top = Y + 'px';
+    owner.innerHTML = title;
+    rightMenu.style.display = 'block'; 
+}
+
+//Скрытие контекстнного меню
+function hideRightMenu() { 
+    rightMenu.style.display = 'none';
+    owner.innerHTML = '';
+}

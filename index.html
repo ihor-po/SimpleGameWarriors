@@ -25,11 +25,16 @@
 				<a class="section-button__button" id="playAgain-btn" onclick="playAgain()">Продолжить этим героем</a>
 				<a class="section-button__button" id="newGame-btn" onclick="newGame()">Новая игря</a>
 			</div> -->
-			<div class="section-fight conteiner--space-around">
+			<div class="section-fight conteiner--space-around" id="fightSection">
 				<div class="section-fight__hero-army-info" id="friendHeroArmyInfo"></div>
 				<div class="section-fight__field">
 					<div class="section-fight__field__friend-hero-side" id="friendSide"></div>
 					<div class="section-fight__field__enemy-hero-side" id="enemySide"></div>
+				</div>
+				<div class="section-fight__field__fight-menu" id="right-menu">
+					<div class="section-fight__field__fight-menu__header" id="owner"></div>
+					<div class="section-fight__field__fight-menu__item">Установить героя</div>
+					<div class="section-fight__field__fight-menu__item">Атаковать</div>
 				</div>
 
 <!-- 				<div class="section-fight__armies section-fight__armies--freind" id="friend">
