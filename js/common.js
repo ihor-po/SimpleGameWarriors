@@ -27,7 +27,18 @@ let newGameBtn = document.getElementById('newGame-btn');
 let fightSection = document.getElementById('fightSection');//+
 let rightMenu = document.getElementById('right-menu');//+
 let owner = document.getElementById('owner');//+
+let addHeroToField = document.getElementById('addHeroToField');//+
+let atackHero = document.getElementById('atackHero');//+
 
+let clientWindowSize = {
+    Width : 0,
+    Height: 0
+};
+
+//при загрузке страницы получаем размер окна
+getClientWindowSize();
+//при загрузке страницы скрываем правое меню
+hideRightMenu();
 
 //Получение случайного числа
 function randomNumber(min, max) {
@@ -39,6 +50,8 @@ function randomNumber(min, max) {
     }
     return rand;
 }
+
+
 
 //Получение имени для героя
 function getNewHeroName(i)  { return names[i]; }
@@ -64,4 +77,10 @@ function showRightMenu(X, Y, title) {
 function hideRightMenu() { 
     rightMenu.style.display = 'none';
     owner.innerHTML = '';
+}
+
+//Получение размеров окна
+function getClientWindowSize() {
+    clientWindowSize.Width = window.innerWidth;
+    clientWindowSize.Height = window.innerHeight;
 }

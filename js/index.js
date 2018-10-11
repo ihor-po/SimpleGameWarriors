@@ -31,12 +31,40 @@ let enemyHero = null; //+
 
 friendSide.addEventListener('contextmenu', function(e, isEnemy = false) { showMenu(e, friendHero, isEnemy); } );
 enemySide.addEventListener('contextmenu', function(e, isEnemy = true) { showMenu(e, enemyHero, isEnemy); } );
-fightSection.addEventListener('click', function() { hideRightMenu() } );
+fightSection.addEventListener('click', function(e) { fightSectionClick(e) } );
 /* ========================================================================= */
 
-rightMenu.style.display = 'none';
+function fightSectionClick(e){
+//	console.log(e);
+//  console.log(clientWindowSize);
+	switch(e.target)
+	{
+		case addHeroToField:
+			if (e.pageX < clientWindowSize.Width / 2)
+			{
+				friendHero = createHero();
+				friendSide.innerHTML = '<img src="' + friendHero.Skin + '" style="width: 150px; height: auto;left:' + e.pageX + 'px;top:' + e.pageY + 'px;position: absolute;">';
+				hideRightMenu();
+			}
+			else
+			{
+				enemyHero = createHero();
+				enemySide.innerHTML = '<img src="' + enemyHero.Skin + '" style="width: 10%; height: auto;left:' + e.pageX + 'px;top:' + e.pageY + 'px;position: absolute;">';
+				hideRightMenu();
+			}
+			break;
+		case atackHero:
+			alert('atack')
+			break;
+		case owner:
+			break;	
+		default:
+			hideRightMenu();
+			break;		
+	}
+}
 
-//Для отображения своего меню
+//Для отображения своего меню +++++++
 function showMenu(e, hero, isEnemy)
 {
 	e.preventDefault(); //для отмены показа стандартного меню
@@ -51,15 +79,13 @@ function showMenu(e, hero, isEnemy)
 	}
 }
 
-//Создание героя
-function createHero(e) {
+//Создание героя ++++
+function createHero() {
 	let newLevel = randomNumber(0, MAX_HERO_LEVEL - 10);
 	let newArmyStrength = randomNumber(MIN_ARMY_STRENGTH, MAX_ARMY_STRENGTH);
 	let skin = getHeroSkin(randomNumber(0, MAX_HEROS_SKINS - 1));
 
-	//enemySide.innerHTML = '<img src="' + skin + '" style="width: 10%; height: auto;left:' + e.pageX + 'px;top:' + e.pageY + 'px;position: absolute;">';
-
-	//return new Hero(newLevel, newArmyStrength, skin);
+	return new Hero(newLevel, newArmyStrength, skin);
 }
 
 //Новая игра
