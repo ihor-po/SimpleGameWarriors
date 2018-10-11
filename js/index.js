@@ -35,21 +35,21 @@ fightSection.addEventListener('click', function(e) { fightSectionClick(e) } );
 /* ========================================================================= */
 
 function fightSectionClick(e){
-//	console.log(e);
-//  console.log(clientWindowSize);
 	switch(e.target)
 	{
 		case addHeroToField:
-			if (e.pageX < clientWindowSize.Width / 2)
+			if (e.pageX < clientWindowSize.Width / 2 + 16)
 			{
 				friendHero = createHero();
-				friendSide.innerHTML = '<img src="' + friendHero.Skin + '" style="width: 150px; height: auto;left:' + e.pageX + 'px;top:' + e.pageY + 'px;position: absolute;">';
+				addHeroToFiled(friendSide, e.pageX, e.pageY, friendHero.Skin, false);
+				//friendSide.innerHTML = '<img src="' + friendHero.Skin + '" style="width: 150px; height: auto;left:' + e.pageX + 'px;top:' + e.pageY + 'px;position: absolute;">';
 				hideRightMenu();
 			}
 			else
 			{
 				enemyHero = createHero();
-				enemySide.innerHTML = '<img src="' + enemyHero.Skin + '" style="width: 10%; height: auto;left:' + e.pageX + 'px;top:' + e.pageY + 'px;position: absolute;">';
+				addHeroToFiled(enemySide, e.pageX, e.pageY, enemyHero.Skin, true);
+				//enemySide.innerHTML = '<img src="' + enemyHero.Skin + '" style="width: 10%; height: auto;left:' + e.pageX + 'px;top:' + e.pageY + 'px;position: absolute;">';
 				hideRightMenu();
 			}
 			break;
@@ -62,6 +62,77 @@ function fightSectionClick(e){
 			hideRightMenu();
 			break;		
 	}
+}
+
+function addHeroToFiled(side, X, Y, skin, isEnemy)
+{
+	let sideStartWidth = 0;
+	let sideStartHeight = 0;
+	let sideWidth = side.offsetWidth;								//получение ширины слоя
+	let sideHeight = fightSection.offsetHeight + HEADER_SIZE;		//получение высоты поля
+
+	Y = getYPosition(Y, sideHeight);
+
+	if (!isEnemy)
+	{
+		sideStartWidth = clientWindowSize.Width / 2 - sideWidth; //начальная координата поля героя
+		X = getXPosition(X, sideStartWidth, clientWindowSize.Width / 2);
+
+		//добавление слоя с картинкой героя
+		side.innerHTML = '<div class="hero-look" id=\'friendHeroLook\'></div>';
+		let friendHeroLook = document.getElementById('friendHeroLook');
+		setHeroDiv(friendHeroLook, skin, X, Y);
+	}
+	else
+	{
+		sideStartWidth = clientWindowSize.Width / 2 + 16;
+		X = getXPosition(X, sideStartWidth, sideStartWidth + sideWidth);
+
+		//добавление слоя с картинкой героя
+		side.innerHTML = '<div class="hero-look" id=\'enemyHeroLook\'></div>';
+		let enemyHeroLook = document.getElementById('enemyHeroLook');
+		setHeroDiv(enemyHeroLook, skin, X, Y);
+	}
+}
+
+//Отображение слоя героя ++++++++
+function setHeroDiv(heroDive, skin, X, Y) {
+		heroDive.style.left = X / 16 + 'rem';
+		heroDive.style.top = Y / 16 + 'rem';
+		heroDive.style.backgroundImage = 'url(' + skin + ')';
+		heroDive.style.backgroundSize = '9.375rem 11.26rem';
+}
+
+//Получение координаты по горизонтали +++++++++
+function getXPosition(X, minWidth, maxWidth) {
+	let res = X;
+
+	if (X + IMAGE_WIDTH > maxWidth)
+	{
+		let tmp = X + IMAGE_WIDTH - maxWidth;
+		res = X - tmp;
+	}
+
+	if (X + IMAGE_WIDTH < minWidth)
+	{
+		let tmp = minWidth - X + IMAGE_WIDTH;
+		res = X + tmp;		
+	}
+
+	return res;
+}
+
+//Получение координаты по вертикали ++++++++
+function getYPosition(Y, maxHeight) {
+	let res = Y - 60;
+
+	if (Y + IMAGE_HEIGHT > maxHeight)
+	{
+		let tmp = Y + IMAGE_HEIGHT - maxHeight;
+		res = Y - tmp;
+	}
+
+	return res;
 }
 
 //Для отображения своего меню +++++++

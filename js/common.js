@@ -7,6 +7,10 @@ const MAX_WARRIOR_TYPE = 4;
 const MAX_HERO_LEVEL = 99;
 const MAX_WARRIOR_LEVEL = 150;
 const MAX_HEROS_SKINS = 4;
+const HEADER_SIZE = 112;
+
+const IMAGE_WIDTH = 150;
+const IMAGE_HEIGHT = 180;
 
 
 let names = ['Перун', 'Хорс', 'Дажьбог', 'Стрибог', 'Семаргл', 'Мокошь', 'Велес', 'Рожаницы и Род', 'Сварог', 'Сварожич'];

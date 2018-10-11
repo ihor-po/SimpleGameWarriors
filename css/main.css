@@ -204,6 +204,11 @@ main {
     background-color: rgba(0, 0, 0, 0.3);
     color: #c2c2c2;
 }
+.hero-look {
+    position: absolute;
+    width: 9.375rem;
+    height: 11.26rem;
+}
 /* ================ Right menu ================ */
 .section-fight__field__fight-menu {
     position: absolute;
