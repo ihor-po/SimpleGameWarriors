@@ -11,6 +11,8 @@ const HEADER_SIZE = 112;
 
 const IMAGE_WIDTH = 150;
 const IMAGE_HEIGHT = 180;
+const FRIEND_HERO_BORDER = '-webkit-box-shadow: 0px 0px 13px 1px rgba(0,128,0,0.65);' +
+'-moz-box-shadow: 0px 0px 13px 1px rgba(0,128,0,0.65); box-shadow: 0px 0px 13px 1px rgba(0,128,0,0.65);';
 
 
 let names = ['Перун', 'Хорс', 'Дажьбог', 'Стрибог', 'Семаргл', 'Мокошь', 'Велес', 'Рожаницы и Род', 'Сварог', 'Сварожич'];
@@ -87,4 +89,19 @@ function hideRightMenu() {
 function getClientWindowSize() {
     clientWindowSize.Width = window.innerWidth;
     clientWindowSize.Height = window.innerHeight;
+}
+
+//Скрыть / показать кнопки для атаки
+function showHideFightButtons(show)
+{
+    if (show)
+    {
+        fightBtn.style.display = 'block';    //скрытие кнопки сразиться
+        atackHero.style.display = 'block';   //скрытие меню атаковать
+    }
+    else
+    {
+        fightBtn.style.display = 'none';    //скрытие кнопки сразиться
+        atackHero.style.display = 'none';   //скрытие меню атаковать
+    }
 }

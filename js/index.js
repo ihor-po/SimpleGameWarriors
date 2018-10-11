@@ -24,6 +24,12 @@ let sectionFightField = document.getElementById('section-fight__field');
 let friendHero = null; //+
 let enemyHero = null; //+
 
+//Переменные для хранения выбора героев
+let friendChoosed = false;
+let enemyChoosed = false;
+
+showHideFightButtons(false);
+
 /**
 *Подписка на события
 *
@@ -41,17 +47,16 @@ function fightSectionClick(e){
 			if (e.pageX < clientWindowSize.Width / 2 + 16)
 			{
 				friendHero = createHero();
+				createHeroArmy(friendHero);
 				addHeroToFiled(friendSide, e.pageX, e.pageY, friendHero.Skin, false);
-				//friendSide.innerHTML = '<img src="' + friendHero.Skin + '" style="width: 150px; height: auto;left:' + e.pageX + 'px;top:' + e.pageY + 'px;position: absolute;">';
-				hideRightMenu();
 			}
 			else
 			{
 				enemyHero = createHero();
+				createHeroArmy(enemyHero);
 				addHeroToFiled(enemySide, e.pageX, e.pageY, enemyHero.Skin, true);
-				//enemySide.innerHTML = '<img src="' + enemyHero.Skin + '" style="width: 10%; height: auto;left:' + e.pageX + 'px;top:' + e.pageY + 'px;position: absolute;">';
-				hideRightMenu();
 			}
+			hideRightMenu();
 			break;
 		case atackHero:
 			alert('atack')
@@ -82,6 +87,8 @@ function addHeroToFiled(side, X, Y, skin, isEnemy)
 		side.innerHTML = '<div class="hero-look" id=\'friendHeroLook\'></div>';
 		let friendHeroLook = document.getElementById('friendHeroLook');
 		setHeroDiv(friendHeroLook, skin, X, Y);
+
+		//Подписка слоя с героем на собитие нажатия кнопки мыши
 		friendHeroLook.addEventListener('click', function(e) { setRemoveBorder(this, false) } );
 	}
 	else
@@ -93,18 +100,58 @@ function addHeroToFiled(side, X, Y, skin, isEnemy)
 		side.innerHTML = '<div class="hero-look" id=\'enemyHeroLook\'></div>';
 		let enemyHeroLook = document.getElementById('enemyHeroLook');
 		setHeroDiv(enemyHeroLook, skin, X, Y);
+
+		//Подписка слоя с героем на собитие нажатия кнопки мыши
 		enemyHeroLook.addEventListener('click', function(e) { setRemoveBorder(this) } );
 	}
 }
 
+//проверка выбора обоих героев
+function bothChoose()
+{
+	if (friendChoosed && enemyChoosed)
+	{
+		return true;
+	}
+
+	return false
+}
+
+//Подсветка слоя с героя ++++++
 function setRemoveBorder(heroDiv, isEnemy = true) {
 	if (heroDiv.style.border == '')
 	{
-		(isEnemy) ? heroDiv.style.border = '2px solid red' : heroDiv.style.border = '2px solid green';
+		if (isEnemy)
+		{
+			heroDiv.style.border = '2px solid red';
+			enemyChoosed = true;
+		}
+		else
+		{
+			heroDiv.style.border = '2px solid green';
+			friendChoosed = true;
+		}
 	}
 	else
 	{
+		if (isEnemy)
+		{
+			enemyChoosed = false;
+		}
+		else
+		{
+			friendChoosed = false;
+		}
 		heroDiv.style.border = '';	
+	}
+
+	if (bothChoose())
+	{
+		showHideFightButtons(true);
+	}
+	else
+	{
+		showHideFightButtons(false);
 	}
 }
 
@@ -172,6 +219,21 @@ function createHero() {
 	return new Hero(newLevel, newArmyStrength, skin);
 }
 
+//Создание армии героя +++++++
+function createHeroArmy(hero) {
+	for (let i = 0; i < hero.ArmyStrength; i++)
+	{
+		createWarrior(hero);
+	}
+}
+
+//Создание воина +++++
+function createWarrior(hero) {
+	let newLevel = randomNumber(0, MAX_WARRIOR_LEVEL / 2);
+	let newWarriorType = randomNumber(0, MAX_WARRIOR_TYPE - 1);
+	return new Warrior(newLevel, newWarriorType, hero);
+}
+
 //Новая игра
 function newGame() 
 {
@@ -202,21 +264,6 @@ function newGame()
 //newGame();
 
 
-
-//Создание воина
-function createWarrior(hero) {
-	let newLevel = randomNumber(0, MAX_WARRIOR_LEVEL / 2);
-	let newWarriorType = randomNumber(0, MAX_WARRIOR_TYPE - 1);
-	return new Warrior(newLevel, newWarriorType, hero);
-}
-
-//Создание армии героя
-function createHeroArmy(hero) {
-	for (let i = 0; i < hero.ArmyStrength; i++)
-	{
-		createWarrior(hero);
-	}
-}
 
 //Создание информации о войске
 function getHeroArmyInfo(hero) {
