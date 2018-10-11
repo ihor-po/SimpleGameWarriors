@@ -14,8 +14,8 @@ let enemyHeroPowerIndex = document.getElementById('enemyHeroPowerIndex');
 let friendHeroLevel = document.getElementById('friendHeroLevel');
 let enemyHeroLevel = document.getElementById('enemyHeroLevel');
 
-let friendHeroArmyInfo = document.getElementById('friendHeroArmyInfo'); //+
-let enemyHeroArmyInfo = document.getElementById('enemyHeroArmyInfo'); //+
+let friendHeroArmyInfo = document.getElementById('friendArmyInfo'); //+
+let enemyHeroArmyInfo = document.getElementById('enemyArmyInfo'); //+
 
 let friendSide = document.getElementById('friendSide'); //+
 let enemySide = document.getElementById('enemySide'); //+
@@ -46,15 +46,29 @@ function fightSectionClick(e){
 		case addHeroToField:
 			if (e.pageX < clientWindowSize.Width / 2 + 16)
 			{
-				friendHero = createHero();
-				createHeroArmy(friendHero);
-				addHeroToFiled(friendSide, e.pageX, e.pageY, friendHero.Skin, false);
+				if (friendHero == null)
+				{
+					friendHero = createHero();
+					createHeroArmy(friendHero);
+					addHeroToFiled(friendSide, e.pageX, e.pageY, friendHero.Skin, false);
+
+					//Отображение имени героя
+					friendHeroName.firstChild.nodeValue = friendHero.MyName();
+					//Вывод информации о герое и его войска
+					fillHeroInfo(friendHero, false);
+				}
+
 			}
 			else
 			{
 				enemyHero = createHero();
 				createHeroArmy(enemyHero);
 				addHeroToFiled(enemySide, e.pageX, e.pageY, enemyHero.Skin, true);
+
+				//Отображение имени героя
+				enemyHeroName.firstChild.nodeValue = enemyHero.MyName();
+				//Вывод информации о герое и его войска
+				fillHeroInfo(enemyHero, true);
 			}
 			hideRightMenu();
 			break;
@@ -251,13 +265,7 @@ function newGame()
 	createHeroArmy(friendHero);
 	createHeroArmy(enemyHero);
 
-	//Отображение имени героя
-	friendHeroName.firstChild.nodeValue = friendHero.MyName();
-	enemyHeroName.firstChild.nodeValue = enemyHero.MyName();
 
-	//Вывод информации о герое и его войска
-	fillHeroInfo(friendHero, false);
-	fillHeroInfo(enemyHero, true);
 }
 
 
@@ -286,14 +294,13 @@ function fillHeroInfo(hero, isEnemy)
 	{
 		enemyHeroPowerIndex.innerHTML = hero.PowerIndex;
 		enemyHeroLevel.firstChild.nodeValue = hero.Level;
-		enemyHeroArmyInfo.innerHTML = '<img src="' + hero.Skin + '" style="width: 60%; height: auto;">';
 		enemyHeroArmyInfo.innerHTML += getHeroArmyInfo(hero);
 	}
 	else
 	{
 		friendHeroPowerIndex.innerHTML = hero.PowerIndex;
 		friendHeroLevel.firstChild.nodeValue = hero.Level;
-		friendHeroArmyInfo.innerHTML = '<img src="' + hero.Skin + '" style="width: 60%; height: auto;">';
+		console.log(friendHeroArmyInfo);
 		friendHeroArmyInfo.innerHTML += getHeroArmyInfo(hero);
 	}
 }

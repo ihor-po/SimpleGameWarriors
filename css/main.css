@@ -101,8 +101,32 @@ main {
 }
 .section-fight__hero-army-info {
     width: 15%;
-    height: 10rem;
-    background-color: green;
+    height: auto;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -webkit-flex-flow: column nowrap;
+    flex-flow: column nowrap;
+    background-color: rgba(70, 106, 152, 0.4);
+}
+.section-fight__hero-army-info__hero-info {
+    background-color: rgba(70, 106, 152, 0.4);
+    border-bottom: 1px solid rgb(70, 106, 152);
+    padding-bottom: 0.5rem;
+}
+.section-fight__hero-army-info__hero-info__name {
+    padding: 0.5rem 0.375rem;
+    font-size: 1.2rem;
+    width: 100%;
+    display: -webkit-inline-flex;
+    display: inline-flex;
+}
+.section-fight__hero-army-info__hero-info__level {
+    display: -webkit-inline-flex;
+    display: inline-flex;
+    padding: 0.5rem 0.375rem;
+    width: 100%;
+
 }
 .section-fight__field {
     width: 70%;
@@ -159,7 +183,7 @@ main {
     border-bottom: 1px solid #800000;
 }
 .fight__armies__hero__fio {
-    font-size: 2rem;
+    font-size: 1.3rem;
 }
 .fight__armies__hero__fio--green {
     color: #004c00;
@@ -168,9 +192,9 @@ main {
     color: #4c0000;
 }
 .fight__armies__hero__level {
-    font-size: 3rem;  
+    font-size: 1.3rem;  
     border-radius: 0.5rem;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.5rem;
 }
 .fight__armies__hero__level--green {
     background-color: rgba(0, 76, 0, 0.7);
@@ -189,7 +213,8 @@ main {
     -webkit-flex-flow: column nowrap;
     flex-flow: column nowrap;
     padding: 0 1rem;
-    font-size: 1.5rem;
+    font-size: 1rem;
+    line-height: 1rem;
 }
 .text--bold {
     font-weight: 600;
@@ -200,7 +225,7 @@ main {
 .level-information {
     border: 1px solid;
     border-radius: 0.375rem;
-    padding: 0.25rem 0.5rem;
+    padding: 0.15rem 0.2rem;
     background-color: rgba(0, 0, 0, 0.3);
     color: #c2c2c2;
 }
