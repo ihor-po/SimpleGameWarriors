@@ -208,6 +208,7 @@ main {
     position: absolute;
     width: 9.375rem;
     height: 11.26rem;
+    border: none;
 }
 /* ================ Right menu ================ */
 .section-fight__field__fight-menu {

@@ -82,6 +82,7 @@ function addHeroToFiled(side, X, Y, skin, isEnemy)
 		side.innerHTML = '<div class="hero-look" id=\'friendHeroLook\'></div>';
 		let friendHeroLook = document.getElementById('friendHeroLook');
 		setHeroDiv(friendHeroLook, skin, X, Y);
+		friendHeroLook.addEventListener('click', function(e) { setRemoveBorder(this, false) } );
 	}
 	else
 	{
@@ -92,15 +93,27 @@ function addHeroToFiled(side, X, Y, skin, isEnemy)
 		side.innerHTML = '<div class="hero-look" id=\'enemyHeroLook\'></div>';
 		let enemyHeroLook = document.getElementById('enemyHeroLook');
 		setHeroDiv(enemyHeroLook, skin, X, Y);
+		enemyHeroLook.addEventListener('click', function(e) { setRemoveBorder(this) } );
+	}
+}
+
+function setRemoveBorder(heroDiv, isEnemy = true) {
+	if (heroDiv.style.border == '')
+	{
+		(isEnemy) ? heroDiv.style.border = '2px solid red' : heroDiv.style.border = '2px solid green';
+	}
+	else
+	{
+		heroDiv.style.border = '';	
 	}
 }
 
 //Отображение слоя героя ++++++++
-function setHeroDiv(heroDive, skin, X, Y) {
-		heroDive.style.left = X / 16 + 'rem';
-		heroDive.style.top = Y / 16 + 'rem';
-		heroDive.style.backgroundImage = 'url(' + skin + ')';
-		heroDive.style.backgroundSize = '9.375rem 11.26rem';
+function setHeroDiv(heroDiv, skin, X, Y) {
+		heroDiv.style.left = X / 16 + 'rem';
+		heroDiv.style.top = Y / 16 + 'rem';
+		heroDiv.style.backgroundImage = 'url(' + skin + ')';
+		heroDiv.style.backgroundSize = '9.375rem 11.26rem';
 }
 
 //Получение координаты по горизонтали +++++++++
