@@ -330,13 +330,13 @@ function fillHeroInfo(hero, isEnemy)
 	{
 		enemyHeroPowerIndex.innerHTML = hero.PowerIndex;
 		enemyHeroLevel.firstChild.nodeValue = hero.Level;
-		enemyHeroArmyInfo.innerHTML += getHeroArmyInfo(hero);
+		enemyHeroArmyInfo.innerHTML = getHeroArmyInfo(hero);
 	}
 	else
 	{
 		friendHeroPowerIndex.innerHTML = hero.PowerIndex;
 		friendHeroLevel.firstChild.nodeValue = hero.Level;
-		friendHeroArmyInfo.innerHTML += getHeroArmyInfo(hero);
+		friendHeroArmyInfo.innerHTML = getHeroArmyInfo(hero);
 	}
 }
 
