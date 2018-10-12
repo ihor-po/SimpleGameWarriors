@@ -28,6 +28,13 @@ let enemyHero = null; //+
 let friendChoosed = false;
 let enemyChoosed = false;
 
+//переменная для отслежывания нажатия кнопки мыши
+let mouseMoveRes = 0;
+
+//для хранения ссылки слоя героя
+let copyFriendHero = null;
+let copyEnemyHero = null;
+
 showHideFightButtons(false);
 
 /**
@@ -38,8 +45,47 @@ showHideFightButtons(false);
 friendSide.addEventListener('contextmenu', function(e, isEnemy = false) { showMenu(e, friendHero, isEnemy); } );
 enemySide.addEventListener('contextmenu', function(e, isEnemy = true) { showMenu(e, enemyHero, isEnemy); } );
 fightSection.addEventListener('click', function(e) { fightSectionClick(e) } );
+fightSection.addEventListener('mousemove', function(e) { mouseMoveOnField(e); })
 /* ========================================================================= */
 
+function mouseMoveOnField(e) {
+	if (mouseMoveRes)
+	{
+		let [minX, maxX, X, Y] = [0, 0, 0, 0];
+		let sideWidth = friendSide.offsetWidth;												//получение ширины слоя
+		let sideHeight = fightSection.offsetHeight + HEADER_SIZE;							//получение высоты слоя
+		let minY = HEADER_SIZE + IMAGE_HEIGHT / 2;											//получение минимальных координат Y
+		let maxY = fightSection.offsetHeight + HEADER_SIZE + IMAGE_HEIGHT / 2;				//получение максимальных координат Y
+		switch(e.path[0])
+		{
+			case copyFriendHero:
+				minX = clientWindowSize.Width / 2 - sideWidth * 0.85;						//получение минимальных корддинат X
+				maxX = clientWindowSize.Width / 2 + IMAGE_WIDTH / 2;
+										//получение максимальных координат X
+				heroRelocation(copyFriendHero, e.pageX, e.pageY, minX, maxX, minY, maxY);
+				
+				break;
+			case copyEnemyHero:
+				minX = clientWindowSize.Width / 2 + IMAGE_WIDTH / 2;						//получение минимальных корддинат X
+				maxX = clientWindowSize.Width - sideWidth * 0.30;							//получение максимальных координат X
+
+				heroRelocation(copyEnemyHero, e.pageX, e.pageY, minX, maxX, minY, maxY);
+
+				break;	
+		}
+	}
+}
+
+
+function heroRelocation(hero, X, Y , minX, maxX, minY, maxY) {
+	X = getXPosition(X, minX, maxX) - IMAGE_WIDTH / 2;					//Получение координат X
+	Y = getYPosition(Y, maxY, minY) - IMAGE_HEIGHT / 2;					//Получение координат Y
+
+	hero.style.left = X / 16 + 'rem';
+	hero.style.top = Y / 16 + 'rem';
+}
+
+//Обработка нажатия кнопки меню
 function fightSectionClick(e){
 	switch(e.target)
 	{
@@ -63,7 +109,7 @@ function fightSectionClick(e){
 			{
 				enemyHero = createHero();
 				createHeroArmy(enemyHero);
-				addHeroToFiled(enemySide, e.pageX, e.pageY, enemyHero.Skin, true);
+				addHeroToFiled(enemySide, e.pageX - IMAGE_WIDTH / 2, e.pageY - IMAGE_HEIGHT / 2, enemyHero.Skin, true);
 
 				//Отображение имени героя
 				enemyHeroName.firstChild.nodeValue = enemyHero.MyName();
@@ -83,6 +129,7 @@ function fightSectionClick(e){
 	}
 }
 
+//Устанавливает героя в соответсвующее поле ++++++
 function addHeroToFiled(side, X, Y, skin, isEnemy)
 {
 	let sideStartWidth = 0;
@@ -102,8 +149,13 @@ function addHeroToFiled(side, X, Y, skin, isEnemy)
 		let friendHeroLook = document.getElementById('friendHeroLook');
 		setHeroDiv(friendHeroLook, skin, X, Y);
 
+		copyFriendHero = friendHeroLook;
+
 		//Подписка слоя с героем на собитие нажатия кнопки мыши
 		friendHeroLook.addEventListener('click', function(e) { setRemoveBorder(this, false) } );
+		friendHeroLook.addEventListener('mousedown', function() { ++mouseMoveRes; })
+		friendHeroLook.addEventListener('mouseup', function() { mouseMoveRes = 0; })
+		//friendHeroLook.addEventListener('mousemove', function(e) { mouseMoveOnField(e); })
 	}
 	else
 	{
@@ -117,10 +169,13 @@ function addHeroToFiled(side, X, Y, skin, isEnemy)
 
 		//Подписка слоя с героем на собитие нажатия кнопки мыши
 		enemyHeroLook.addEventListener('click', function(e) { setRemoveBorder(this) } );
+		enemyHeroLook.addEventListener('mousedown', function() { ++mouseMoveRes; })
+		enemyHeroLook.addEventListener('mouseup', function() { mouseMoveRes = 0; })
+		copyEnemyHero = enemyHeroLook;
 	}
 }
 
-//проверка выбора обоих героев
+//проверка выбора обоих героев +++++++
 function bothChoose()
 {
 	if (friendChoosed && enemyChoosed)
@@ -187,23 +242,33 @@ function getXPosition(X, minWidth, maxWidth) {
 		res = X - tmp;
 	}
 
-	if (X + IMAGE_WIDTH < minWidth)
+	if (X < minWidth)
 	{
-		let tmp = minWidth - X + IMAGE_WIDTH;
-		res = X + tmp;		
+		res = minWidth;		
 	}
+
+	// if (X + IMAGE_WIDTH < minWidth)
+	// {
+	// 	console.log([X, X + IMAGE_WIDTH]);
+	// 	let tmp = minWidth - X + IMAGE_WIDTH;
+	// 	res = X + tmp;		
+	// }
 
 	return res;
 }
 
 //Получение координаты по вертикали ++++++++
-function getYPosition(Y, maxHeight) {
-	let res = Y - 60;
+function getYPosition(Y, maxHeight, minHeight = null) {
+	let res = Y-60;
 
 	if (Y + IMAGE_HEIGHT > maxHeight)
 	{
 		let tmp = Y + IMAGE_HEIGHT - maxHeight;
 		res = Y - tmp;
+	}
+	if (minHeight != null && Y < minHeight)
+	{
+		res = minHeight;
 	}
 
 	return res;
@@ -248,46 +313,7 @@ function createWarrior(hero) {
 	return new Warrior(newLevel, newWarriorType, hero);
 }
 
-//Новая игра
-function newGame() 
-{
-	fightBtn.style.display = 'block';
-	playAgainBtn.style.display = 'none';
-	newGameBtn.style.display = 'none';
-
-	friend.style.display = 'block';
-	enemy.style.display = 'block';
-
-	friendHero = createHero();	//cоздание дружественного героя
-	enemyHero = createHero();	//cоздание вражеского героя
-
-	//Создание армии героя
-	createHeroArmy(friendHero);
-	createHeroArmy(enemyHero);
-
-
-}
-
-
-//newGame();
-
-
-
-//Создание информации о войске
-function getHeroArmyInfo(hero) {
-	let info = '';
-	hero.HerosArmy.forEach(function(warrior) {
-		info += '<p>' + warrior.warriorHtmlInfo() + '</p>'; 
-	});
-	return info;
-}
-
-function heroArmyLevelUp(hero)
-{
-	hero.HerosArmy.forEach(function(warrior) { warrior.levelUp() });
-}
-
-//Заполнение карточки информацией о герое
+//Заполнение карточки информацией о герое +++++++
 function fillHeroInfo(hero, isEnemy)
 {
 	if (isEnemy)
@@ -300,9 +326,47 @@ function fillHeroInfo(hero, isEnemy)
 	{
 		friendHeroPowerIndex.innerHTML = hero.PowerIndex;
 		friendHeroLevel.firstChild.nodeValue = hero.Level;
-		console.log(friendHeroArmyInfo);
 		friendHeroArmyInfo.innerHTML += getHeroArmyInfo(hero);
 	}
+}
+
+//Создание информации о войске +++++++++
+function getHeroArmyInfo(hero) {
+	let info = '';
+	hero.HerosArmy.forEach(function(warrior) {
+		info += '<p>' + warrior.warriorHtmlInfo() + '</p>'; 
+	});
+	return info;
+}
+
+//Новая игра
+function newGame() 
+{
+	fightBtn.style.display = 'block';
+	playAgainBtn.style.display = 'none';
+	newGameBtn.style.display = 'none';
+
+	friend.style.display = 'block';
+	enemy.style.display = 'block';
+
+//	friendHero = createHero();	//cоздание дружественного героя
+//	enemyHero = createHero();	//cоздание вражеского героя
+
+	//Создание армии героя
+//	createHeroArmy(friendHero);
+//	createHeroArmy(enemyHero);
+}
+
+
+//newGame();
+
+
+
+
+
+function heroArmyLevelUp(hero)
+{
+	hero.HerosArmy.forEach(function(warrior) { warrior.levelUp() });
 }
 
 //Сражение героев
