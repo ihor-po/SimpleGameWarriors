@@ -1,7 +1,5 @@
 'use strict'
 
-let isEnemy = false; //флаг для создания героя при повторной игре
-
 let friendDiv = document.getElementById('friend');
 let enemyDiv = document.getElementById('enemy');
 
@@ -14,15 +12,14 @@ let enemyHeroPowerIndex = document.getElementById('enemyHeroPowerIndex');
 let friendHeroLevel = document.getElementById('friendHeroLevel');
 let enemyHeroLevel = document.getElementById('enemyHeroLevel');
 
-let friendHeroArmyInfo = document.getElementById('friendArmyInfo'); //+
-let enemyHeroArmyInfo = document.getElementById('enemyArmyInfo'); //+
+let friendHeroArmyInfo = document.getElementById('friendArmyInfo');
+let enemyHeroArmyInfo = document.getElementById('enemyArmyInfo');
 
-let friendSide = document.getElementById('friendSide'); //+
-let enemySide = document.getElementById('enemySide'); //+
-let sectionFightField = document.getElementById('section-fight__field');
+let friendSide = document.getElementById('friendSide');
+let enemySide = document.getElementById('enemySide');
 
-let friendHero = null; //+
-let enemyHero = null; //+
+let friendHero = null;
+let enemyHero = null;
 
 //Переменные для хранения выбора героев
 let friendChoosed = false;
@@ -36,6 +33,9 @@ let copyFriendHero = null;
 let copyEnemyHero = null;
 
 showHideFightButtons(false);
+showHideNewGameBtn(false);
+//fightResult.classList.add('fightResult--red');
+showFightResult(false);
 
 /**
 *Подписка на события
@@ -76,7 +76,7 @@ function mouseMoveOnField(e) {
 	}
 }
 
-
+//Перемещение героя по своему полю
 function heroRelocation(hero, X, Y , minX, maxX, minY, maxY) {
 	X = getXPosition(X, minX, maxX) - IMAGE_WIDTH / 2;					//Получение координат X
 	Y = getYPosition(Y, maxY, minY) - IMAGE_HEIGHT / 2;					//Получение координат Y
@@ -103,7 +103,6 @@ function fightSectionClick(e){
 					//Вывод информации о герое и его войска
 					fillHeroInfo(friendHero, false);
 				}
-
 			}
 			else
 			{
@@ -119,7 +118,7 @@ function fightSectionClick(e){
 			hideRightMenu();
 			break;
 		case atackHero:
-			alert('atack')
+			LetsDance();
 			break;
 		case owner:
 			break;	
@@ -129,9 +128,10 @@ function fightSectionClick(e){
 	}
 }
 
-//Устанавливает героя в соответсвующее поле ++++++
+//Устанавливает героя в соответсвующее поле
 function addHeroToFiled(side, X, Y, skin, isEnemy)
 {
+	showHideElement(newGameBtn, 'none');
 	let sideStartWidth = 0;
 	let sideStartHeight = 0;
 	let sideWidth = side.offsetWidth;								//получение ширины слоя
@@ -155,7 +155,6 @@ function addHeroToFiled(side, X, Y, skin, isEnemy)
 		friendHeroLook.addEventListener('click', function(e) { setRemoveBorder(this, false) } );
 		friendHeroLook.addEventListener('mousedown', function() { ++mouseMoveRes; })
 		friendHeroLook.addEventListener('mouseup', function() { mouseMoveRes = 0; })
-		//friendHeroLook.addEventListener('mousemove', function(e) { mouseMoveOnField(e); })
 	}
 	else
 	{
@@ -175,7 +174,7 @@ function addHeroToFiled(side, X, Y, skin, isEnemy)
 	}
 }
 
-//проверка выбора обоих героев +++++++
+//проверка выбора обоих героев
 function bothChoose()
 {
 	if (friendChoosed && enemyChoosed)
@@ -186,7 +185,7 @@ function bothChoose()
 	return false
 }
 
-//Подсветка слоя с героя ++++++
+//Подсветка слоя с героя
 function setRemoveBorder(heroDiv, isEnemy = true) {
 	if (heroDiv.style.border == '')
 	{
@@ -224,7 +223,7 @@ function setRemoveBorder(heroDiv, isEnemy = true) {
 	}
 }
 
-//Отображение слоя героя ++++++++
+//Отображение слоя героя
 function setHeroDiv(heroDiv, skin, X, Y) {
 		heroDiv.style.left = X / 16 + 'rem';
 		heroDiv.style.top = Y / 16 + 'rem';
@@ -232,7 +231,7 @@ function setHeroDiv(heroDiv, skin, X, Y) {
 		heroDiv.style.backgroundSize = '9.375rem 11.26rem';
 }
 
-//Получение координаты по горизонтали +++++++++
+//Получение координаты по горизонтали
 function getXPosition(X, minWidth, maxWidth) {
 	let res = X;
 
@@ -247,17 +246,10 @@ function getXPosition(X, minWidth, maxWidth) {
 		res = minWidth;		
 	}
 
-	// if (X + IMAGE_WIDTH < minWidth)
-	// {
-	// 	console.log([X, X + IMAGE_WIDTH]);
-	// 	let tmp = minWidth - X + IMAGE_WIDTH;
-	// 	res = X + tmp;		
-	// }
-
 	return res;
 }
 
-//Получение координаты по вертикали ++++++++
+//Получение координаты по вертикали
 function getYPosition(Y, maxHeight, minHeight = null) {
 	let res = Y-60;
 
@@ -274,7 +266,7 @@ function getYPosition(Y, maxHeight, minHeight = null) {
 	return res;
 }
 
-//Для отображения своего меню +++++++
+//Для отображения своего меню
 function showMenu(e, hero, isEnemy)
 {
 	e.preventDefault(); //для отмены показа стандартного меню
@@ -282,14 +274,32 @@ function showMenu(e, hero, isEnemy)
 	if (e.target == friendSide)
 	{
 		showRightMenu(e.pageX, e.pageY, 'Дружуственная');
+
+		if (friendHero != null)
+		{
+			showHideHeroButton(false);
+		}
+		else
+		{
+			showHideHeroButton(true);
+		}
 	}
 	else if (e.target == enemySide)
 	{
 		showRightMenu(e.pageX, e.pageY, 'Вражеская');
+
+		if (enemyHero != null)
+		{
+			showHideHeroButton(false);
+		}
+		else
+		{
+			showHideHeroButton(true);
+		}
 	}
 }
 
-//Создание героя ++++
+//Создание героя
 function createHero() {
 	let newLevel = randomNumber(0, MAX_HERO_LEVEL - 10);
 	let newArmyStrength = randomNumber(MIN_ARMY_STRENGTH, MAX_ARMY_STRENGTH);
@@ -313,7 +323,7 @@ function createWarrior(hero) {
 	return new Warrior(newLevel, newWarriorType, hero);
 }
 
-//Заполнение карточки информацией о герое +++++++
+//Заполнение карточки информацией о герое
 function fillHeroInfo(hero, isEnemy)
 {
 	if (isEnemy)
@@ -342,83 +352,90 @@ function getHeroArmyInfo(hero) {
 //Новая игра
 function newGame() 
 {
-	fightBtn.style.display = 'block';
-	playAgainBtn.style.display = 'none';
-	newGameBtn.style.display = 'none';
+	if (friendHero != null)
+	{
+		clearHeroInfo(false);
+	}
 
-	friend.style.display = 'block';
-	enemy.style.display = 'block';
+	if (enemyHero != null)
+	{
+		clearHeroInfo(true);
+	}
 
-//	friendHero = createHero();	//cоздание дружественного героя
-//	enemyHero = createHero();	//cоздание вражеского героя
-
-	//Создание армии героя
-//	createHeroArmy(friendHero);
-//	createHeroArmy(enemyHero);
+	showHideElement(newGameBtn, 'none');
 }
 
-
-//newGame();
-
-
-
-
-
+//Повышение уровня герою и войску
 function heroArmyLevelUp(hero)
 {
 	hero.HerosArmy.forEach(function(warrior) { warrior.levelUp() });
 }
 
-//Сражение героев
-function LetsDance() {
-	fightBtn.style.display = 'none';
-	playAgainBtn.style.display = 'block';
-	newGameBtn.style.display = 'block';
-
-	switch(friendHero.atack(enemyHero))
-	{
-		case 1:
-			isEnemy = true;
-			enemy.style.display = 'none';
-			friendHero.levelUp();
-			heroArmyLevelUp(friendHero);
-			fillHeroInfo(friendHero, false);
-			break;
-		case 0:
-			isEnemy = false;
-			friend.style.display = 'none';
-			enemyHero.levelUp();
-			heroArmyLevelUp(enemyHero);
-			fillHeroInfo(enemyHero, true);
-			break;
-		default: 
-			friendDiv.style.display = 'none';
-			enemyDiv.style.display = 'none';
-			break;		
-	}
-}
-
-//Сыграть еще раз
-function playAgain()
+//Убрать проигравшего с поля
+function clearHeroInfo(isEnemy)
 {
-	fightBtn.style.display = 'block';
-	playAgainBtn.style.display = 'none';
-	newGameBtn.style.display = 'none';
-
 	if (isEnemy)
 	{
-		enemyHero = createHero();;
-		createHeroArmy(enemyHero);
-		enemyHeroName.firstChild.nodeValue = enemyHero.MyName();
-		fillHeroInfo(enemyHero, true);
-		enemyDiv.style.display = 'block';
+		showHideElement(copyEnemyHero, 'none');
+		enemyHero = null;
+		copyEnemyHero = null;
+		enemyHeroName.firstChild.nodeValue = 'Герой';
+		enemyHeroPowerIndex.innerHTML = 0;
+		enemyHeroLevel.firstChild.nodeValue = 0;
+		enemyHeroArmyInfo.innerHTML = '';
+		enemyChoosed = false;
 	}
 	else
 	{
-		friendHero = createHero();
-		createHeroArmy(friendHero);
-		friendHeroName.firstChild.nodeValue = friendHero.MyName();
-		fillHeroInfo(friendHero, false);
-		friendDiv.style.display = 'block';
+		showHideElement(copyFriendHero, 'none');
+		friendHero = null;
+		copyFriendHero = null;
+		friendHeroName.firstChild.nodeValue = 'Герой';
+		friendHeroPowerIndex.innerHTML = 0;
+		friendHeroLevel.firstChild.nodeValue = 0;
+		friendHeroArmyInfo.innerHTML = '';
+		friendChoosed = false;
 	}
+	showHideFightButtons(false);
+}
+
+
+//Сражение героев
+function LetsDance() {
+	switch(friendHero.atack(enemyHero))
+	{
+		case 1:
+
+			fightResult.classList.add('fightResult--green');
+			fightResult.innerHTML = '<h3 class=\'fightResult-text\'>winner</h3>';
+			showFightResult(true);
+
+			friendHero.levelUp();
+			heroArmyLevelUp(friendHero);
+			fillHeroInfo(friendHero, false);
+
+			clearHeroInfo(true);
+
+			break;
+		case 0:
+
+			fightResult.classList.add('fightResult--red');
+			fightResult.innerHTML = '<h3 class=\'fightResult-text\'>loser</h3>';
+			showFightResult(true);
+
+			enemyHero.levelUp();
+			heroArmyLevelUp(enemyHero);
+			fillHeroInfo(enemyHero, true);
+
+			clearHeroInfo(false);
+
+			break;
+		default: 
+			fightResult.innerHTML = '<h3 class=\'fightResult-text\'>draw</h3>';
+			showFightResult(true);
+
+			break;		
+	}
+	showHideElement(fightBtn, 'none');
+	showHideElement(newGameBtn, 'block');
 }

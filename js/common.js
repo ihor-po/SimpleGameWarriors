@@ -27,7 +27,6 @@ let herosSkins = [
 
 
 let fightBtn = document.getElementById('fight-btn');
-let playAgainBtn = document.getElementById('playAgain-btn');
 let newGameBtn = document.getElementById('newGame-btn');
 
 let fightSection = document.getElementById('fightSection');//+
@@ -35,6 +34,7 @@ let rightMenu = document.getElementById('right-menu');//+
 let owner = document.getElementById('owner');//+
 let addHeroToField = document.getElementById('addHeroToField');//+
 let atackHero = document.getElementById('atackHero');//+
+let fightResult = document.getElementById('fightResult');//+
 
 let clientWindowSize = {
     Width : 0,
@@ -92,6 +92,19 @@ function getClientWindowSize() {
 }
 
 //Скрыть / показать кнопки для атаки
+function showHideHeroButton(show)
+{
+    if (show)
+    {
+        addHeroToField.style.display = 'block';    //скрытие кнопки добавить героя
+    }
+    else
+    {
+        addHeroToField.style.display = 'none';    //скрытие кнопки добавить героя
+    }
+}
+
+//Скрыть / показать кнопки для атаки
 function showHideFightButtons(show)
 {
     if (show)
@@ -103,5 +116,29 @@ function showHideFightButtons(show)
     {
         fightBtn.style.display = 'none';    //скрытие кнопки сразиться
         atackHero.style.display = 'none';   //скрытие меню атаковать
+    }
+}
+
+//Скрыть / отобразить элемент
+function showHideElement(element ,res) { element.style.display = res }
+
+//Скрыть / показать кнопку Сразиться 
+function showHideFightBtn(status) { (status) ? showHideElement(fightBtn, 'block')  : showHideElement(fightBtn, 'none'); }
+
+//Скрыть / показать кнопку Новая игра
+function showHideNewGameBtn(status) { (status) ? showHideElement(newGameBtn, 'block') : showHideElement(newGameBtn, 'none'); }
+
+function showFightResult(status) { 
+    console.log(fightResult);
+    if (status) 
+    {
+        showHideElement(fightResult, 'block');
+        setTimeout(showFightResult, 5000, false);
+    } 
+    else 
+    {
+        showHideElement(fightResult, 'none'); 
+        fightResult.classList.remove("fightResult--red");
+        fightResult.classList.remove("fightResult--green");
     }
 }
