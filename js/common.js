@@ -129,7 +129,6 @@ function showHideFightBtn(status) { (status) ? showHideElement(fightBtn, 'block'
 function showHideNewGameBtn(status) { (status) ? showHideElement(newGameBtn, 'block') : showHideElement(newGameBtn, 'none'); }
 
 function showFightResult(status) { 
-    console.log(fightResult);
     if (status) 
     {
         showHideElement(fightResult, 'block');
