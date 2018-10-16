@@ -19,17 +19,17 @@ let names = ['Перун', 'Хорс', 'Дажьбог', 'Стрибог', 'Се
 let warriorNames = ['Святослав', 'Доброжир', 'Тихомир', 'Ратибор', 'Ярополк', 'Гостомысл', 'Велимудр', 'Всеволод', 'Любомила', 'Доброгнева'];
 let warriorType = ['Воин', 'Лучник', 'Маг', 'Мифическое существо'];
 let herosSkins = [
-	'../img/hero_1_web.png',
-	'../img/hero_2_web.png',
-	'../img/hero_3_web.png',
-	'../img/hero_4_web.png',
+	'img/hero_1_web.png',
+	'img/hero_2_web.png',
+	'img/hero_3_web.png',
+	'img/hero_4_web.png',
 ];
 
 
 let fightBtn = document.getElementById('fight-btn');
 let newGameBtn = document.getElementById('newGame-btn');
 
-let fightSection = document.getElementById('fightSection');//+
+
 let rightMenu = document.getElementById('right-menu');//+
 let owner = document.getElementById('owner');//+
 let addHeroToField = document.getElementById('addHeroToField');//+

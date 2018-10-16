@@ -10,17 +10,17 @@
 </head>
 <body>
 	<div class="main-container">
-		<div class="header conteiner--space-between container--align-items-center">
+		<div class="header conteiner--space-between container--align-items-center" id='header'>
 			<h1 class="header__title header__title--left15">W</h1>
 			<div class="section-button conteiner--center container--align-items-center">
 				<a class="section-button__button" id="fight-btn" onclick="LetsDance()">Сразиться</a>
 				<a class="section-button__button" id="newGame-btn" onclick="newGame()">Новая игря</a>
 			</div>
-			<h1 class="header__title header__title--right15">Warriors</h1>
+			<h1 class="header__title header__title--right15" id="headerTitle">Warriors</h1>
 		</div>
 		<main>
 			<div class="section-fight conteiner--space-around" id="fightSection">
-				<div class="section-fight__hero-army-info">
+<!-- 				<div class="section-fight__hero-army-info">
 					<div class="section-fight__hero-army-info__hero-info">
 						<div class="section-fight__hero-army-info__hero-info__name conteiner--space-between container--align-items-center">
 							<h3 class="fight__armies__hero__fio fight__armies__hero__fio--green" id="friendHeroName">Герой</h3>
@@ -32,7 +32,7 @@
 						</div>
 					</div>
 					<div class="section-fight__armies__army conteiner--space-around" id="friendArmyInfo"></div>
-				</div>
+				</div> -->
 				<div class="section-fight__field">
 					<div class="section-fight__field__friend-hero-side" id="friendSide"></div>
 					<div class="section-fight__field__enemy-hero-side" id="enemySide"></div>
@@ -42,7 +42,7 @@
 					<div class="section-fight__field__fight-menu__item" id="addHeroToField">Установить героя</div>
 					<div class="section-fight__field__fight-menu__item" id="atackHero">Атаковать</div>
 				</div>
-				<div class="section-fight__hero-army-info" id="enemyHeroArmyInfo">
+				<!-- <div class="section-fight__hero-army-info" id="enemyHeroArmyInfo">
 					<div class="section-fight__hero-army-info__hero-info">
 						<div class="section-fight__hero-army-info__hero-info__name conteiner--space-between container--align-items-center">
 							<h3 class="fight__armies__hero__fio fight__armies__hero__fio--red" id="enemyHeroName">Герой</h3>
@@ -54,13 +54,20 @@
 						</div>
 					</div>
 					<div class="section-fight__armies__army conteiner--space-around" id="enemyArmyInfo" id="enemyHeroLevel"></div>
-				</div>
+				</div> -->
 				
 			</div>
-			<div class="section-result"></div>
+			<div class="section-chat" id="sectionChat">
+				<form class="chatForm" name="chatForm" id="chatForm">
+					<label class="chatForm__label" for="herroMessage">Сообщение</label>
+					<input class="chatForm__input" type="text" name="herroMessage" id="herroMessage" placeholder="Введите сообщение">
+					<button class="chatForm__button" type="submit">Отправить</button>
+				</form>
+			</div>
 		</main>
 	</div>
 	<div class="fightResult" id="fightResult"><h3 class='fightResult-text'>Loser</h3></div>
+	<script type="text/javascript" src="js/preload.js"></script>
 	<script type="text/javascript" src="js/common.js"></script>
 	<script type="text/javascript" src="js/human.js"></script>
 	<script type="text/javascript" src="js/warrior.js"></script>

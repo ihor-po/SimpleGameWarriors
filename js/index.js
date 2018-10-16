@@ -15,9 +15,6 @@ let enemyHeroLevel = document.getElementById('enemyHeroLevel');
 let friendHeroArmyInfo = document.getElementById('friendArmyInfo');
 let enemyHeroArmyInfo = document.getElementById('enemyArmyInfo');
 
-let friendSide = document.getElementById('friendSide');
-let enemySide = document.getElementById('enemySide');
-
 let friendHero = null;
 let enemyHero = null;
 
