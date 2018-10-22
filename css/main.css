@@ -43,17 +43,22 @@ body, html {
     -webkit-align-items: center;
     align-items: center;
 }
+@keyframes header_text {
+    from 
+    {
+        text-shadow: -4px 1px 8px #FFFFFF;
+    }
+    to 
+    {
+        text-shadow: 4px 1px 8px #FFFFFF;
+    }
+}
 .header__title {
     font-size: 2.5rem;
     text-transform: uppercase;
     opacity: 1;
-    -ms-transform: rotateY(0deg);
-    -webkit-transform: rotateY(0deg);
-    transform: rotateY(0deg);
-    transition-property: transform opacity;
-    -webkit-transition: 5s;
-    transition: 5s;
-    transition-timing-function: ease;
+    color:rgb(0, 35, 82);
+    font-weight: 500;
 }
 .header__title--left15 {
     margin-left: 1.5rem;
@@ -61,6 +66,19 @@ body, html {
 .header__title--right15 {
     margin-right: 1.5rem;
 }
+.header__title-effect {
+    animation-name: header_text;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+}
+.header__logo-effect {
+    animation-name: header_text;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+}
+
 main {
     display: -webkit-flex;
     display: -moz-flex;
@@ -112,8 +130,19 @@ main {
     -webkit-transition: 5s;
     transition: 5s;
 }
+@keyframes armyInfoShow {
+    from 
+    {
+        opacity: 1;
+    }
+    to 
+    {
+        opacity:0; 
+    }
+}
 .section-fight__hero-army-info {
-    width: 15%;
+    position: absolute;
+    width: 13.75rem;
     height: auto;
     display: -webkit-flex;
     display: -moz-flex;
@@ -121,25 +150,81 @@ main {
     -webkit-flex-flow: column nowrap;
     flex-flow: column nowrap;
     background-color: rgba(70, 106, 152, 0.4);
+    border: 1px solid rgb(70, 106, 152);
+    border-radius: 0.3125rem;
+    animation-name: armyInfoShow;
+    animation-duration: 8s;
+    animation-iteration-count: 1;
+    bottom: 1.3125rem;
+    padding: 0.3rem 0.1rem;
 }
-.section-fight__hero-army-info__hero-info {
+.section-fight__hero-army-info__friend {
+    left: 1.3125rem;
+}
+.section-fight__hero-army-info__enemy {
+    right: 1.3125rem;
+}
+.section-fight__hero-info {
+    position: absolute;
+    top:5.3125rem;
+    width: 13.75rem;
     background-color: rgba(70, 106, 152, 0.4);
-    border-bottom: 1px solid rgb(70, 106, 152);
-    padding-bottom: 0.5rem;
+    border: 1px solid rgb(70, 106, 152);
+    border-radius: 0.3125rem;
 }
-.section-fight__hero-army-info__hero-info__name {
-    padding: 0.5rem 0.375rem;
+.section-fight__hero-info__name {
+    padding: 0.3rem 0.275rem;
     font-size: 1.2rem;
     width: 100%;
     display: -webkit-inline-flex;
     display: inline-flex;
 }
-.section-fight__hero-army-info__hero-info__level {
+.section-fight__hero-info__level {
     display: -webkit-inline-flex;
     display: inline-flex;
-    padding: 0.5rem 0.375rem;
+    padding: 0.3rem 0.275rem 0.5rem;
     width: 100%;
 
+}
+@keyframes friend-info-rotate {
+    from 
+    {
+        opacity: 0;
+        width: 0;
+        left: 8.1875rem;
+    }
+    to 
+    {
+        opacity:1; 
+        width: 13.75rem;
+        left: 1.3125rem;
+    }
+}
+@keyframes enemy-info-rotate {
+    from 
+    {
+        opacity: 0;
+        width: 0;
+        right: 8.1875rem;
+    }
+    to 
+    {
+        opacity:1; 
+        width: 13.75rem;
+        right: 1.3125rem;
+    }
+}
+.friend-info {
+    left: 1.3125rem;
+    animation-name: friend-info-rotate;
+    animation-duration: 3s;
+    animation-iteration-count: 1;
+}
+.enemy-info {
+    right: 1.3125rem;
+    animation-name: enemy-info-rotate;
+    animation-duration: 3s;
+    animation-iteration-count: 1;
 }
 .section-fight__field {
     width: 100%;

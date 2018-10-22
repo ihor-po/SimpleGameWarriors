@@ -9,12 +9,15 @@ let header = document.getElementById('header');
 * HEADER TITLE
 */
 let headerTitle = document.getElementById('headerTitle');
-header.addEventListener('transitionend', function() { rotateTitle(); } )
 /*
 * FIGHT SECTION
 */
 let fightSection = document.getElementById('fightSection');
 fightSection.addEventListener('transitionend', function() { friendEnemySidesShow(); } )
+
+//Блоки содержащие информацию об имени и силе войска героя 
+let friendHeroInfo = document.getElementById('friendInfo');
+let enemyHeroInfo = document.getElementById('enemyInfo');
 
 /*
 * FIGHT SECTION FRIEND / ENEMY HERO SIDE
@@ -22,16 +25,38 @@ fightSection.addEventListener('transitionend', function() { friendEnemySidesShow
 let friendSide = document.getElementById('friendSide');
 let enemySide = document.getElementById('enemySide');
 
+//Пункт меню для отображения информации об армии героя
+let heroInfoMenu = document.getElementById('heroInfo');
+
+//Слои для отображения армии героя
+let friendArmyDiv = document.getElementById('friendArmyDiv');
+let enemyArmyDiv = document.getElementById('enemyArmyDiv');
+
+friendArmyDiv.addEventListener('animationend', function() {
+	this.style.display = 'none';
+});
+
+enemyArmyDiv.addEventListener('animationend', function() {
+	this.style.display = 'none';
+});
+
 /*
 * CHAT SECTION
 */
 let sectionChat = document.getElementById('sectionChat');
 let chatForm = document.getElementById('chatForm');
-sectionChat.addEventListener('transitionend', function() { chatForm.style.opacity = 1; })
+sectionChat.addEventListener('transitionend', function() { chatForm.style.opacity = 1; });
+
 
 /* ======================================================================================= */
 
-setTimeout(function() { loadPage() }, 1000);
+friendHeroInfo.style.display = 'none';
+enemyHeroInfo.style.display = 'none';
+heroInfoMenu.style.display = 'none';
+friendArmyDiv.style.display = 'none';
+enemyArmyDiv.style.display = 'none';
+
+setTimeout(function() { loadPage() }, 500);
 
 
 function loadPage(){
@@ -57,10 +82,4 @@ function friendEnemySidesShow() {
 	enemySide.style.width = '50%';
 	friendSide.style.left = '0';
 	enemySide.style.left = '0';
-}
-
-function rotateTitle() {
-	headerTitle.style.transform = 'rotateY(360deg)';
-	headerTitle.style.opacity = 0.5;
-	headerTitle.style.opacity = 1;
 }

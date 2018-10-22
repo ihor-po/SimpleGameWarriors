@@ -29,7 +29,6 @@ let herosSkins = [
 let fightBtn = document.getElementById('fight-btn');
 let newGameBtn = document.getElementById('newGame-btn');
 
-
 let rightMenu = document.getElementById('right-menu');//+
 let owner = document.getElementById('owner');//+
 let addHeroToField = document.getElementById('addHeroToField');//+

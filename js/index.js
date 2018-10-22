@@ -43,8 +43,10 @@ friendSide.addEventListener('contextmenu', function(e, isEnemy = false) { showMe
 enemySide.addEventListener('contextmenu', function(e, isEnemy = true) { showMenu(e, enemyHero, isEnemy); } );
 fightSection.addEventListener('click', function(e) { fightSectionClick(e) } );
 fightSection.addEventListener('mousemove', function(e) { mouseMoveOnField(e); })
+sectionChat.addEventListener('mousemove', function(e) { console.log(e.path[0]) });
 /* ========================================================================= */
 
+//Событие перемещения мыши по боевому полю
 function mouseMoveOnField(e) {
 	if (mouseMoveRes)
 	{
@@ -95,10 +97,13 @@ function fightSectionClick(e){
 					createHeroArmy(friendHero);
 					addHeroToFiled(friendSide, e.pageX, e.pageY, friendHero.Skin, false);
 
+
 					//Отображение имени героя
 					friendHeroName.firstChild.nodeValue = friendHero.MyName();
 					//Вывод информации о герое и его войска
 					fillHeroInfo(friendHero, false);
+					friendHeroInfo.style.display = 'block';
+					heroInfo.style.display = 'block';
 				}
 			}
 			else
@@ -111,18 +116,37 @@ function fightSectionClick(e){
 				enemyHeroName.firstChild.nodeValue = enemyHero.MyName();
 				//Вывод информации о герое и его войска
 				fillHeroInfo(enemyHero, true);
+				enemyHeroInfo.style.display = 'block';
 			}
 			hideRightMenu();
 			break;
 		case atackHero:
 			LetsDance();
 			break;
+		case heroInfoMenu:
+			showHeroArmyInfo();
+			break;	
 		case owner:
 			break;	
 		default:
 			hideRightMenu();
 			break;		
 	}
+}
+
+//Отображение армии героя
+function showHeroArmyInfo()
+{
+	switch(heroInfo.dataset.hero)
+	{
+		case 'friend':
+			friendArmyDiv.style.display='';
+			break;
+		case 'enemy':
+			enemyArmyDiv.style.display='';
+			break;	
+	}
+	hideRightMenu();
 }
 
 //Устанавливает героя в соответсвующее поле
@@ -275,10 +299,23 @@ function showMenu(e, hero, isEnemy)
 		if (friendHero != null)
 		{
 			showHideHeroButton(false);
+
+			if (friendArmyDiv.style.display == 'none')
+			{
+				heroInfo.style.display = 'block';
+				heroInfo.dataset.hero = 'friend';
+			}
+			else
+			{
+				heroInfo.style.display = 'none';
+				heroInfo.dataset.hero = '';
+			}
 		}
 		else
 		{
 			showHideHeroButton(true);
+			heroInfo.style.display = 'none';
+			heroInfo.dataset.hero = '';
 		}
 	}
 	else if (e.target == enemySide)
@@ -288,10 +325,18 @@ function showMenu(e, hero, isEnemy)
 		if (enemyHero != null)
 		{
 			showHideHeroButton(false);
+
+			if (enemyArmyDiv.style.display == 'none')
+			{
+				heroInfo.style.display = 'block';
+				heroInfo.dataset.hero = 'enemy';
+			}
 		}
 		else
 		{
 			showHideHeroButton(true);
+			heroInfo.style.display = 'none';
+			heroInfo.dataset.hero = '';
 		}
 	}
 }
@@ -305,7 +350,7 @@ function createHero() {
 	return new Hero(newLevel, newArmyStrength, skin);
 }
 
-//Создание армии героя +++++++
+//Создание армии героя
 function createHeroArmy(hero) {
 	for (let i = 0; i < hero.ArmyStrength; i++)
 	{
@@ -313,7 +358,7 @@ function createHeroArmy(hero) {
 	}
 }
 
-//Создание воина +++++
+//Создание воина
 function createWarrior(hero) {
 	let newLevel = randomNumber(0, MAX_WARRIOR_LEVEL / 2);
 	let newWarriorType = randomNumber(0, MAX_WARRIOR_TYPE - 1);
@@ -337,7 +382,7 @@ function fillHeroInfo(hero, isEnemy)
 	}
 }
 
-//Создание информации о войске +++++++++
+//Создание информации о войске
 function getHeroArmyInfo(hero) {
 	let info = '';
 	hero.HerosArmy.forEach(function(warrior) {
@@ -373,6 +418,7 @@ function clearHeroInfo(isEnemy)
 {
 	if (isEnemy)
 	{
+		enemyInfo.style.display='none';
 		showHideElement(copyEnemyHero, 'none');
 		enemyHero = null;
 		copyEnemyHero = null;
@@ -384,6 +430,7 @@ function clearHeroInfo(isEnemy)
 	}
 	else
 	{
+		friendInfo.style.display='none';
 		showHideElement(copyFriendHero, 'none');
 		friendHero = null;
 		copyFriendHero = null;
