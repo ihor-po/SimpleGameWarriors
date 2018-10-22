@@ -43,8 +43,28 @@ friendSide.addEventListener('contextmenu', function(e, isEnemy = false) { showMe
 enemySide.addEventListener('contextmenu', function(e, isEnemy = true) { showMenu(e, enemyHero, isEnemy); } );
 fightSection.addEventListener('click', function(e) { fightSectionClick(e) } );
 fightSection.addEventListener('mousemove', function(e) { mouseMoveOnField(e); })
-sectionChat.addEventListener('mousemove', function(e) { console.log(e.path[0]) });
+sectionChat.addEventListener('mousemove', function(e) { /*console.log(e.path[0])*/ });
+sendMessageBtn.addEventListener('click', function() { sendMessage(); })
 /* ========================================================================= */
+
+//Отправка сообщения
+function sendMessage() {
+	let heroPosition;
+	(friendChoosed) ? heroPosition = getHeroPosition(copyFriendHero) : heroPosition = getHeroPosition(copyEnemyHero);
+	(friendChoosed) ? showMessageDiv(heroMessage.value, heroPosition[0], heroPosition[1], false) : showMessageDiv(heroMessage.value, heroPosition[0], heroPosition[1], true);
+	heroMessage.value = '';
+}
+
+function getHeroPosition(hero)
+{
+	let position = hero.getBoundingClientRect();
+	console.log(position);
+	let X;
+	(copyEnemyHero) ? X = (position.right - position.width) / 16 : X = position.left / 16;
+	;
+	let Y = (position.top - (3 * 16)) / 16;
+	return [X, Y];
+}
 
 //Событие перемещения мыши по боевому полю
 function mouseMoveOnField(e) {
@@ -58,7 +78,7 @@ function mouseMoveOnField(e) {
 		switch(e.path[0])
 		{
 			case copyFriendHero:
-				minX = clientWindowSize.Width / 2 - sideWidth * 0.85;						//получение минимальных корддинат X
+				minX = clientWindowSize.Width / 2 - sideWidth * 0.89;						//получение минимальных корддинат X
 				maxX = clientWindowSize.Width / 2 + IMAGE_WIDTH / 2;
 										//получение максимальных координат X
 				heroRelocation(copyFriendHero, e.pageX, e.pageY, minX, maxX, minY, maxY);
@@ -66,7 +86,7 @@ function mouseMoveOnField(e) {
 				break;
 			case copyEnemyHero:
 				minX = clientWindowSize.Width / 2 + IMAGE_WIDTH / 2;						//получение минимальных корддинат X
-				maxX = clientWindowSize.Width - sideWidth * 0.30;							//получение максимальных координат X
+				maxX = clientWindowSize.Width + 58;							//получение максимальных координат X
 
 				heroRelocation(copyEnemyHero, e.pageX, e.pageY, minX, maxX, minY, maxY);
 
@@ -200,6 +220,7 @@ function bothChoose()
 {
 	if (friendChoosed && enemyChoosed)
 	{
+		enableDisableChatField(false);
 		return true;
 	}
 
@@ -231,16 +252,18 @@ function setRemoveBorder(heroDiv, isEnemy = true) {
 		{
 			friendChoosed = false;
 		}
-		heroDiv.style.border = '';	
+		heroDiv.style.border = '';
 	}
 
 	if (bothChoose())
 	{
 		showHideFightButtons(true);
+		enableDisableChatField(false);	
 	}
 	else
 	{
 		showHideFightButtons(false);
+		enableDisableChatField(true);
 	}
 }
 
@@ -330,6 +353,11 @@ function showMenu(e, hero, isEnemy)
 			{
 				heroInfo.style.display = 'block';
 				heroInfo.dataset.hero = 'enemy';
+			}
+			else
+			{
+				heroInfo.style.display = 'none';
+				heroInfo.dataset.hero = '';
 			}
 		}
 		else

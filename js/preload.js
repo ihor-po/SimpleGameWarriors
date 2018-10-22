@@ -45,8 +45,13 @@ enemyArmyDiv.addEventListener('animationend', function() {
 */
 let sectionChat = document.getElementById('sectionChat');
 let chatForm = document.getElementById('chatForm');
+let sendMessageBtn = document.getElementById('sendMessageBtn');
+let heroMessage = document.getElementById('heroMessage');
+
 sectionChat.addEventListener('transitionend', function() { chatForm.style.opacity = 1; });
 
+let friendMessageDiv = document.getElementById('friend-message');
+let enemyMessageDiv = document.getElementById('enemy-message');
 
 /* ======================================================================================= */
 
@@ -55,6 +60,10 @@ enemyHeroInfo.style.display = 'none';
 heroInfoMenu.style.display = 'none';
 friendArmyDiv.style.display = 'none';
 enemyArmyDiv.style.display = 'none';
+friendMessageDiv.style.display = 'none';
+friendMessageDiv.style.opacity = 0;
+enemyMessageDiv.style.display = 'none';
+enemyMessageDiv.style.opacity = 0;
 
 setTimeout(function() { loadPage() }, 500);
 
@@ -66,6 +75,7 @@ function loadPage(){
 	fightSection.style.borderColor = 'rgba(99, 99, 99, 1)';
 
 	sectionChatShow();
+	enableDisableChatField(false);
 }
 
 function sectionChatShow() {
@@ -82,4 +92,45 @@ function friendEnemySidesShow() {
 	enemySide.style.width = '50%';
 	friendSide.style.left = '0';
 	enemySide.style.left = '0';
+}
+
+function enableDisableChatField(status)
+{
+	if (status)
+	{
+		sendMessageBtn.disabled = false;
+		heroMessage.disabled = false;
+	}
+	else
+	{
+		sendMessageBtn.disabled = true;
+		heroMessage.disabled = true;
+	}
+}
+
+function showMessageDiv(msg ,X, Y, isEnemy) {
+	if (isEnemy)
+	{
+		enemyMessageDiv.innerHTML = msg;
+		enemyMessageDiv.style.left = X + 'rem';
+		enemyMessageDiv.style.top = Y + 'rem';
+		enemyMessageDiv.style.display = 'block';
+		enemyMessageDiv.style.opacity = 1;
+		setTimeout(function() {
+			enemyMessageDiv.style.opacity = 0;
+			enemyMessageDiv.style.display = 'none';
+		  }, 4000);
+	}
+	else
+	{
+		friendMessageDiv.innerHTML = msg;
+		friendMessageDiv.style.left = X + 'rem';
+		friendMessageDiv.style.top = Y + 'rem';
+		friendMessageDiv.style.display = 'block';
+		friendMessageDiv.style.opacity = 1;
+		setTimeout(function() {
+			friendMessageDiv.style.opacity = 0;
+			friendMessageDiv.style.display = 'none';
+		  }, 4000);
+	}
 }

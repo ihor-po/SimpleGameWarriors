@@ -293,6 +293,10 @@ main {
     padding: 0.3rem 0.5rem;
     border-radius: 0.3125rem;
 }
+.chatForm__button:disabled {
+    color: #C2C2C2;
+    background-color: rgb(6, 28, 68);
+}
 .chatForm__input {
     width: 23rem;
     border: 2px solid rgb(9, 63, 162);
@@ -482,3 +486,27 @@ main {
     margin-top: calc(25% - 5rem);
 }
 /* ============================================ */
+.friend-message, .enemy-message {
+    width: auto;
+    max-width: 10rem;
+    height: auto;
+    opacity: 1;
+    border-style: solid;
+    border-width: 0.0625rem;
+    position: absolute;
+    text-align: center;
+    padding: 0.3125rem;
+    border-radius: 10rem;
+    transition-property: opacity;
+    -webkit-transition: 5s;
+    transition: 5s;
+    color: #FFFFFF;
+}
+.friend-message {
+    border-color: rgb(0, 96, 0);
+    background-color: rgba(0, 96, 0, 0.7);
+}
+.enemy-message {
+    border-color: rgb(96, 0, 0);
+    background-color: rgba(96, 0, 0, 0.7);
+}

@@ -7,6 +7,7 @@ const MAX_WARRIOR_TYPE = 4;
 const MAX_HERO_LEVEL = 99;
 const MAX_WARRIOR_LEVEL = 150;
 const MAX_HEROS_SKINS = 4;
+const MAX_HEROS_MESSAGES = 8;
 const HEADER_SIZE = 112;
 
 const IMAGE_WIDTH = 150;
@@ -25,15 +26,26 @@ let herosSkins = [
 	'img/hero_4_web.png',
 ];
 
+let herosMessages = [
+    'За державу!',
+    'УБЬЮ!!!!',
+    'А а а а а а а а а а а а а а а а а а а а а',
+    'Смотри, крокодил полетел',
+    'Препод смотрит?',
+    'Кофе-бейк будет?',
+    'Давай забухаем?',
+    'Ты класная....'
+];
+
 
 let fightBtn = document.getElementById('fight-btn');
 let newGameBtn = document.getElementById('newGame-btn');
 
-let rightMenu = document.getElementById('right-menu');//+
-let owner = document.getElementById('owner');//+
-let addHeroToField = document.getElementById('addHeroToField');//+
-let atackHero = document.getElementById('atackHero');//+
-let fightResult = document.getElementById('fightResult');//+
+let rightMenu = document.getElementById('right-menu');
+let owner = document.getElementById('owner');
+let addHeroToField = document.getElementById('addHeroToField');
+let atackHero = document.getElementById('atackHero');
+let fightResult = document.getElementById('fightResult');
 
 let clientWindowSize = {
     Width : 0,

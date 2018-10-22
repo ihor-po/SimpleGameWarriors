@@ -58,12 +58,14 @@
 				</div>
 			</div>
 			<div class="section-chat" id="sectionChat">
-				<form class="chatForm" name="chatForm" id="chatForm">
-					<label class="chatForm__label" for="herroMessage">Сообщение</label>
-					<input class="chatForm__input" type="text" name="herroMessage" id="herroMessage" placeholder="Введите сообщение">
-					<button class="chatForm__button" type="submit">Отправить</button>
+				<form class="chatForm" name="chatForm" id="chatForm" onsubmit="return false;">
+					<label class="chatForm__label" for="heroMessage">Сообщение</label>
+					<input class="chatForm__input" type="text" name="heroMessage" id="heroMessage" placeholder="Введите сообщение">
+					<button class="chatForm__button" type="submit" id="sendMessageBtn">Отправить</button>
 				</form>
 			</div>
+			<div class="friend-message" id="friend-message"></div>
+			<div class="enemy-message" id="enemy-message"></div>
 		</main>
 	</div>
 	<div class="fightResult" id="fightResult"><h3 class='fightResult-text'>Loser</h3></div>
