@@ -28,6 +28,9 @@ let enemySide = document.getElementById('enemySide');
 //Пункт меню для отображения информации об армии героя
 let heroInfoMenu = document.getElementById('heroInfo');
 
+//Пункт меню скрыть/отобразить чат
+let showChat = document.getElementById('showChat');
+
 //Слои для отображения армии героя
 let friendArmyDiv = document.getElementById('friendArmyDiv');
 let enemyArmyDiv = document.getElementById('enemyArmyDiv');

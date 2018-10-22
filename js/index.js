@@ -24,6 +24,7 @@ let enemyChoosed = false;
 
 //переменная для отслежывания нажатия кнопки мыши
 let mouseMoveRes = 0;
+let mouseOnChat = 0;
 
 //для хранения ссылки слоя героя
 let copyFriendHero = null;
@@ -43,9 +44,48 @@ friendSide.addEventListener('contextmenu', function(e, isEnemy = false) { showMe
 enemySide.addEventListener('contextmenu', function(e, isEnemy = true) { showMenu(e, enemyHero, isEnemy); } );
 fightSection.addEventListener('click', function(e) { fightSectionClick(e) } );
 fightSection.addEventListener('mousemove', function(e) { mouseMoveOnField(e); })
-sectionChat.addEventListener('mousemove', function(e) { /*console.log(e.path[0])*/ });
+sectionChat.addEventListener('mousedown', function() { ++mouseOnChat; })
+sectionChat.addEventListener('mouseup', function() { mouseOnChat = 0; })
+sectionChat.addEventListener('mousemove', function(e) { mouseMoveOnChat(e); });
 sendMessageBtn.addEventListener('click', function() { sendMessage(); })
 /* ========================================================================= */
+
+function mouseMoveOnChat(e) {
+	if (mouseOnChat)
+	{
+		sectionChat.style.transition = 'none';
+
+		let minX = 0;
+		let minY = 4 * 16;
+		let maxX = clientWindowSize.Width - 40 * 16;
+		let maxY = clientWindowSize.Height - 6 * 16;
+
+
+
+
+
+		switch(e.path[0])
+		{
+			case sectionChat:
+			case chatForm:
+			case heroMessage:
+				chatRelocation(sectionChat, e.pageX, e.pageY, minX, maxX, minY, maxY);
+				break;	
+		}
+	}
+}
+
+//Перемещение героя по своему полю
+function chatRelocation(chat, X, Y , minX, maxX, minY, maxY) {
+	let halfWidth = 20 * 16;
+	let halfHeight = 3 * 16;
+
+	X = X - halfWidth;
+	Y = Y - halfHeight;
+
+	chat.style.left = X / 16 + 'rem';
+	chat.style.top = Y / 16 + 'rem';
+}
 
 //Отправка сообщения
 function sendMessage() {
@@ -55,6 +95,7 @@ function sendMessage() {
 	heroMessage.value = '';
 }
 
+//Отправка случайного сообщения героем
 function sendMessageBeforeFight(isEnemy) {
 
 	let heroPosition;
@@ -163,6 +204,9 @@ function fightSectionClick(e){
 			break;
 		case heroInfoMenu:
 			showHeroArmyInfo();
+			break;
+		case showChat:
+			showHideChat();
 			break;	
 		case owner:
 			break;	
@@ -170,6 +214,23 @@ function fightSectionClick(e){
 			hideRightMenu();
 			break;		
 	}
+}
+
+function showHideChat()
+{
+	if (showChat.dataset.show == 'No')
+	{
+		showChat.dataset.show = 'Yes';
+		showChat.innerHTML = 'Показать чат';
+		sectionChat.style.display = 'none';
+	}
+	else
+	{
+		showChat.dataset.show = 'No';
+		showChat.innerHTML = 'Скрыть чат';
+		sectionChat.style.display = 'block';
+	}
+	hideRightMenu();
 }
 
 //Отображение армии героя
