@@ -200,6 +200,7 @@ function fightSectionClick(e){
 			hideRightMenu();
 			break;
 		case atackHero:
+			hideRightMenu();
 			LetsDance();
 			break;
 		case heroInfoMenu:
