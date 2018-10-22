@@ -55,13 +55,31 @@ function sendMessage() {
 	heroMessage.value = '';
 }
 
+function sendMessageBeforeFight(isEnemy) {
+
+	let heroPosition;
+	let msg;
+
+	if (isEnemy)
+	{
+		heroPosition = getHeroPosition(copyEnemyHero);
+		msg = getHeroMessage(randomNumber(0, MAX_HEROS_MESSAGES - 1));
+	}
+	else
+	{
+		heroPosition = getHeroPosition(copyFriendHero);
+		msg = getHeroMessage(randomNumber(0, MAX_HEROS_MESSAGES - 1));
+	}
+
+	showMessageDiv(msg, heroPosition[0], heroPosition[1], isEnemy);
+}
+
 function getHeroPosition(hero)
 {
 	let position = hero.getBoundingClientRect();
-	console.log(position);
 	let X;
 	(copyEnemyHero) ? X = (position.right - position.width) / 16 : X = position.left / 16;
-	;
+
 	let Y = (position.top - (3 * 16)) / 16;
 	return [X, Y];
 }
@@ -474,40 +492,56 @@ function clearHeroInfo(isEnemy)
 
 //Сражение героев
 function LetsDance() {
-	switch(friendHero.atack(enemyHero))
-	{
-		case 1:
 
-			fightResult.classList.add('fightResult--green');
-			fightResult.innerHTML = '<h3 class=\'fightResult-text\'>winner</h3>';
-			showFightResult(true);
+	sendMessageBeforeFight(true);
+	sendMessageBeforeFight(false);
 
-			friendHero.levelUp();
-			heroArmyLevelUp(friendHero);
-			fillHeroInfo(friendHero, false);
+	setTimeout(function() {
+		copyFriendHero.classList.add('rotate');
+		copyEnemyHero.classList.add('rotate');
+	}, 2000);
+	
+	setTimeout(function() { 
+		switch(friendHero.atack(enemyHero))
+		{
+			case 1:
 
-			clearHeroInfo(true);
+				fightResult.classList.add('fightResult--green');
+				fightResult.innerHTML = '<h3 class=\'fightResult-text\'>winner</h3>';
+				showFightResult(true);
 
-			break;
-		case 0:
+				friendHero.levelUp();
+				heroArmyLevelUp(friendHero);
+				fillHeroInfo(friendHero, false);
+				
+				sendMessageBeforeFight(false);
+				copyFriendHero.classList.remove('rotate');
+				clearHeroInfo(true);
 
-			fightResult.classList.add('fightResult--red');
-			fightResult.innerHTML = '<h3 class=\'fightResult-text\'>loser</h3>';
-			showFightResult(true);
+				break;
+			case 0:
 
-			enemyHero.levelUp();
-			heroArmyLevelUp(enemyHero);
-			fillHeroInfo(enemyHero, true);
+				fightResult.classList.add('fightResult--red');
+				fightResult.innerHTML = '<h3 class=\'fightResult-text\'>loser</h3>';
+				showFightResult(true);
 
-			clearHeroInfo(false);
+				enemyHero.levelUp();
+				heroArmyLevelUp(enemyHero);
+				fillHeroInfo(enemyHero, true);
 
-			break;
-		default: 
-			fightResult.innerHTML = '<h3 class=\'fightResult-text\'>draw</h3>';
-			showFightResult(true);
+				sendMessageBeforeFight(true);
+				copyEnemyHero.classList.remove('rotate');
+				clearHeroInfo(false);
 
-			break;		
-	}
+				break;
+			default: 
+				fightResult.innerHTML = '<h3 class=\'fightResult-text\'>draw</h3>';
+				showFightResult(true);
+
+				break;		
+		}
+	}, 4900);
+
 	showHideElement(fightBtn, 'none');
 	showHideElement(newGameBtn, 'block');
 }

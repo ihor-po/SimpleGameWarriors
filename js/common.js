@@ -7,7 +7,7 @@ const MAX_WARRIOR_TYPE = 4;
 const MAX_HERO_LEVEL = 99;
 const MAX_WARRIOR_LEVEL = 150;
 const MAX_HEROS_SKINS = 4;
-const MAX_HEROS_MESSAGES = 8;
+const MAX_HEROS_MESSAGES = 13;
 const HEADER_SIZE = 112;
 
 const IMAGE_WIDTH = 150;
@@ -32,9 +32,14 @@ let herosMessages = [
     'А а а а а а а а а а а а а а а а а а а а а',
     'Смотри, крокодил полетел',
     'Препод смотрит?',
-    'Кофе-бейк будет?',
+    'Кофе-брейк будет?',
     'Давай забухаем?',
-    'Ты класная....'
+    'Ты класная....',
+    'Цой - жив!',
+    'У тю тю тю',
+    'Семки есть?',
+    'Я тебя, с%ка, найду',
+    'Негони...'
 ];
 
 
@@ -81,6 +86,8 @@ function getNewWarriorType(i)  { return warriorType[i]; }
 
 //Получение картинки героя
 function getHeroSkin(i) { return herosSkins[i]; }
+
+function getHeroMessage(i) { return herosMessages[i]; }
 
 //Отображение контекстного меню
 function showRightMenu(X, Y, title) { 

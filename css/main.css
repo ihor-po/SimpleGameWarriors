@@ -214,6 +214,25 @@ main {
         right: 1.3125rem;
     }
 }
+@keyframes rotate {
+    from 
+    {
+        /*transform: rotateZ(0deg) rotateY(360deg);*/
+        transform: rotate3d(1, 1, 1, 0deg);
+    }
+    to 
+    {
+        transform: rotate3d(1, 1, 1, 360deg);
+        /*transform: rotateZ(360deg) rotateY(0deg);*/
+    }
+}
+.rotate {
+    animation-name: rotate;
+    animation-duration: 3s;
+    animation-iteration-count: 1;
+    animation-direction: alternate-reverse;
+}
+
 .friend-info {
     left: 1.3125rem;
     animation-name: friend-info-rotate;
