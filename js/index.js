@@ -112,7 +112,7 @@ function setCookies(options)
 {
 	let cookiesString = '';
 	let domain = 'domain=' + DOMAIN;
-	let expires = new Date(Date.now()+ 300 * 60 *1000).toUTCString(); //куки хранятся 30 минут
+	let expires = new Date(Date.now()+ 30 * 60 *1000).toUTCString(); //куки хранятся 30 минут
 	document.cookie=domain + ';' + 'expires=' + expires + ';';
 	for(let key in options)
 	{
