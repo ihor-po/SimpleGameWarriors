@@ -204,7 +204,14 @@ function loadSavedGame()
 		enableDisableChatField(true);
 	}
 
-	newGameBtn.style.display = localStorage.getItem('newGameBtn');
+	if (localStorage.getItem('newGameBtn'))
+	{
+		newGameBtn.style.display = localStorage.getItem('newGameBtn');
+	}
+	else
+	{
+		newGameBtn.style.display = 'none';
+	}	
 
 }
 /* ************************************* */
