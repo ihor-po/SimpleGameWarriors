@@ -1,5 +1,7 @@
 'use strict'
 
+needRedirect();
+
 /*
 * HEADER
 */
@@ -135,5 +137,37 @@ function showMessageDiv(msg ,X, Y, isEnemy) {
 			friendMessageDiv.style.opacity = 0;
 			friendMessageDiv.style.display = 'none';
 		  }, 4000);
+	}
+}
+
+//Получение куки
+function getCookie() {
+  var matches = document.cookie.match(new RegExp(
+    "(?:^|; )"
+  ));
+
+  let res = undefined;
+
+  if (matches.input != '')
+  {
+  	res = [];
+  	let str = decodeURIComponent(matches.input);
+  	let keyValue = str.split('; ');
+  	for(let key in keyValue)
+  	{
+  		let cookie = keyValue[key].split('=');
+  		res[cookie[0]] = cookie[1];
+  	}
+  }
+  return res;
+}
+
+//Редирект на страницу входа
+function needRedirect()
+{
+	if (getCookie() == undefined)
+	{
+		localStorage.clear();
+		window.location.replace('index.html');
 	}
 }

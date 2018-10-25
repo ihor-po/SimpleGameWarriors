@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Warriors</title>
+    <title>Warriors :: Login</title>
     <link href="css/reset.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
 </head>
@@ -12,69 +12,41 @@
 	<div class="main-container">
 		<div class="header conteiner--space-between container--align-items-center" id='header'>
 			<h1 class="header__title header__title--left15 header__logo-effect">W</h1>
-			<div class="section-button conteiner--center container--align-items-center">
-				<a class="section-button__button" id="fight-btn" onclick="LetsDance()">Сразиться</a>
-				<a class="section-button__button" id="newGame-btn" onclick="newGame()">Новая игря</a>
-			</div>
 			<h1 class="header__title header__title--right15 header__title-effect" id="headerTitle">Warriors</h1>
 		</div>
-		<main>
-			<div class="section-fight conteiner--space-around" id="fightSection">
-					<div class="section-fight__hero-info friend-info" id="friendInfo">
-						<div class="section-fight__hero-info__name conteiner--space-between container--align-items-center">
-							<h3 class="fight__armies__hero__fio fight__armies__hero__fio--green" id="friendHeroName">Герой</h3>
-							<h2 class="fight__armies__hero__level fight__armies__hero__level--green" id="friendHeroLevel">0</h2>
-						</div>
-						<div class="section-fight__hero-info__level conteiner--space-between container--align-items-center">
-							<h3 class="fight__armies__hero__fio fight__armies__hero__fio--green">Сила армии</h3>
-							<h3 class="fight__armies__hero__fio fight__armies__hero__fio--green" id="friendHeroPowerIndex">0</h3>	
-						</div>
+		<main class="conteiner--center">
+			<section class="section__login">
+				<div class="section__login__title">Регистрация</div>
+				<form class="section__login__fields" name="registerForm" id="registerForm" onsubmit="return false;">
+					<div class="section__login__fields__item">
+						<label for="login" class="fields_item__label">Логин</label>
+						<input class="fields_item__input" type="text" name="login" id="login" placeholder="Введите логин">
+						<div class="error" id="login__error">Не верный логин</div>
 					</div>
-					<div class="section-fight__hero-info enemy-info" id="enemyInfo">
-						<div class="section-fight__hero-info__name conteiner--space-between container--align-items-center">
-							<h3 class="fight__armies__hero__fio fight__armies__hero__fio--red" id="enemyHeroName">Герой</h3>
-							<h2 class="fight__armies__hero__level fight__armies__hero__level--red" id="enemyHeroLevel">0</h2>
-						</div>
-						<div class="section-fight__hero-info__level conteiner--space-between container--align-items-center">
-							<h3 class="fight__armies__hero__fio fight__armies__hero__fio--red">Сила армии</h3>
-							<h3 class="fight__armies__hero__fio fight__armies__hero__fio--red" id="enemyHeroPowerIndex">0</h3>	
-						</div>
+					<div class="section__login__fields__item">
+						<label for="email" class="fields_item__label">E-mail</label>
+						<input class="fields_item__input" type="E-mail" name="email" id="email" placeholder="Введите e-mail">
+						<div class="error" id="email__error">Не верный e-mail</div>
 					</div>
-					<div class="section-fight__hero-army-info section-fight__hero-army-info__friend" id="friendArmyDiv">
-						<div class="section-fight__armies__army conteiner--space-around" id="friendArmyInfo"></div>
+					<div class="section__login__fields__item">
+						<label for="phone" class="fields_item__label">Телефон</label>
+						<input class="fields_item__input" type="text" name="phone" id="phone" placeholder="Введите телефон">
+						<div class="error" id="phone__error">Не верный формат телефона +38000-000-00-00</div>
 					</div>
-				<div class="section-fight__field">
-					<div class="section-fight__field__friend-hero-side" id="friendSide"></div>
-					<div class="section-fight__field__enemy-hero-side" id="enemySide"></div>
-				</div>
-				<div class="section-fight__field__fight-menu" id="right-menu">
-					<div class="section-fight__field__fight-menu__header" id="owner"></div>
-					<div class="section-fight__field__fight-menu__item" id="addHeroToField">Установить героя</div>
-					<div class="section-fight__field__fight-menu__item" id="atackHero">Атаковать</div>
-					<div class="section-fight__field__fight-menu__item" id="heroInfo">Информация</div>
-					<div class="section-fight__field__fight-menu__item" id="showChat" data-show="No">Скрыть чат</div>
-				</div>
-				<div class="section-fight__hero-army-info section-fight__hero-army-info__enemy" id="enemyArmyDiv">
-					<div class="section-fight__armies__army conteiner--space-around" id="enemyArmyInfo"></div>
-				</div>
-			</div>
-			<div class="section-chat" id="sectionChat">
-				<form class="chatForm" name="chatForm" id="chatForm" onsubmit="return false;">
-					<label class="chatForm__label" for="heroMessage">Сообщение</label>
-					<input class="chatForm__input" type="text" name="heroMessage" id="heroMessage" placeholder="Введите сообщение">
-					<button class="chatForm__button" type="submit" id="sendMessageBtn">Отправить</button>
+					<div class="section__login__fields__item">
+						<label for="team" class="fields_item__label">Выбор команды</label>
+						<select class="fields_item__input" name="team" id="team" placeholder="Выбор команды">
+							<option></option>
+							<option val='friend'>Зелененькая</option>>
+							<option val='red'>Красненькая</option>
+						</select>
+						<div class="error" id="team__error">Команда не выбрана</div>
+					</div>
+					<button class="registerFormBtn" type="submit">Войти</button>
 				</form>
-			</div>
-			<div class="friend-message" id="friend-message"></div>
-			<div class="enemy-message" id="enemy-message"></div>
+			</section>
 		</main>
 	</div>
-	<div class="fightResult" id="fightResult"><h3 class='fightResult-text'>Loser</h3></div>
-	<script type="text/javascript" src="js/preload.js"></script>
-	<script type="text/javascript" src="js/common.js"></script>
-	<script type="text/javascript" src="js/human.js"></script>
-	<script type="text/javascript" src="js/warrior.js"></script>
-	<script type="text/javascript" src="js/hero.js"></script>
 	<script type="text/javascript" src="js/index.js"></script>
 </body>
 </html>

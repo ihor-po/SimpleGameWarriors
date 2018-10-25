@@ -85,8 +85,6 @@ main {
     display: flex;
     -webkit-flex-flow: column nowrap;
     flex-flow: column nowrap;
-    /*min-height: calc(100vh - 10rem);*/
-    /*height: 100%;*/
     padding: 1rem;
 }
 .section-button {
@@ -153,7 +151,8 @@ main {
     border: 1px solid rgb(70, 106, 152);
     border-radius: 0.3125rem;
     animation-name: armyInfoShow;
-    animation-duration: 8s;
+    animation-delay: 4s;
+    animation-duration: 3s;
     animation-iteration-count: 1;
     bottom: 1.3125rem;
     padding: 0.3rem 0.1rem;
@@ -217,13 +216,11 @@ main {
 @keyframes rotate {
     from 
     {
-        /*transform: rotateZ(0deg) rotateY(360deg);*/
         transform: rotate3d(1, 1, 1, 0deg);
     }
     to 
     {
         transform: rotate3d(1, 1, 1, 360deg);
-        /*transform: rotateZ(360deg) rotateY(0deg);*/
     }
 }
 .rotate {
@@ -336,17 +333,6 @@ main {
     border-color: red;
     background-color: rgba(128, 0, 0, 0.3);
 }
-/*.section-fight__armies__hero {
-    width: 100%;
-    height: 5rem;
-    border-bottom: 1px solid #008000;
-    display: -webkit-flex;
-    display: -moz-flex;
-    display: flex;
-    -webkit-flex-flow: row nowrap;
-    flex-flow: row nowrap;
-    padding: 0 1rem;
-}*/
 .fight__armies__hero--green {
     border-bottom: 1px solid #008000;
 }
@@ -529,3 +515,109 @@ main {
     border-color: rgb(96, 0, 0);
     background-color: rgba(96, 0, 0, 0.7);
 }
+/* ============= Register / Login ============= */
+.section__login {
+    width: 30rem;
+    height: auto;
+    border: 1px solid #3e628e;
+    background-color: #87a0bf;
+    border-radius: 0.5rem;
+    align-self: center;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: column nowrap;
+    flex-flow: column nowrap;
+    padding: 1rem;
+}
+.section__login__title {
+    font-size: 1.6rem;
+    text-align: center;
+    text-transform: uppercase;
+    color: rgb(0, 35, 82);
+    font-weight: 500;
+    text-shadow: 0px 0px 8px #FFFFFF;
+}
+.section__login__fields {
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: column nowrap;
+    flex-flow: column nowrap;
+    width: 100%;
+    height: 100%;
+    padding: 1rem 0.5rem;
+}
+.section__login__fields__item {
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: column nowrap;
+    flex-flow: column nowrap;
+    width: 100%;
+    height: auto;
+    margin: 0.5rem 0;
+}
+.fields_item__label {
+    color: rgb(0, 35, 82);
+    font-size: 1.5rem;
+    margin-bottom: 0.3125rem;
+}
+.fields_item__input {
+  background-color: #f2f2f2;
+  border: 2px solid #3e628e;
+  border-radius: 0.5rem;
+  width: calc(100% - 1.5rem);
+  margin: 0;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-size: 1.3rem;
+  height: 2rem;
+  outline: none;
+  transition: 0.2s ease-in-out;
+  /*margin-bottom: 0.3rem;*/
+  color: #3e628e;
+}
+.fields_item__input::-webkit-input-placeholder {
+  color: #87a0bf;
+}
+@keyframes showError {
+    from 
+    {
+        opacity: 0;
+    }
+    to 
+    {
+        opacity: 1; 
+    }
+}
+.error {
+    width: 99%;
+    padding: 0.2rem 0.7rem;
+    font-style: italic;
+    border-left: 1px solid rgb(128, 0, 0);
+    border-bottom: 1px solid rgb(128, 0, 0);
+    border-right: 1px solid rgb(128, 0, 0); 
+    background-color: rgba(128, 0, 0, 0.3);
+    font-size: 1rem;
+    color: #FFFFFF;
+    border-radius: 1rem;
+    text-shadow: 0px 0px 2px #000000;
+    animation-name: showError;
+    animation-duration: 3s;
+    animation-iteration-count: 1;
+}
+.registerFormBtn {
+    width: 10rem;
+    line-height: 2rem;
+    font-size: 1.3rem;
+    outline: none;
+    align-self: center;
+    margin-top: 2rem;
+    border: 2px solid #3e628e;
+    color: rgb(0, 35, 82);
+}
+.registerFormBtn:hover {
+    background-color: #f2f2f2;
+}
+/* ============================================ */

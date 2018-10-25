@@ -20,5 +20,9 @@ class Human {
  	 MyName() {
  	 	return this.Name;
  	 }
+
+
+ 	 get Name() { return this._Name; }
+ 	 set Name(name) { this._Name = name }
 }
 
