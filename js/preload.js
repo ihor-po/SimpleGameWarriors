@@ -1,7 +1,5 @@
 'use strict'
 
-const DOMAIN  = 'warriors.loc';
-
 needRedirect();
 
 /*
@@ -167,6 +165,7 @@ function getCookie() {
 //Редирект на страницу входа
 function needRedirect()
 {
+	const DOMAIN  = 'warriors.loc';
 	let res = getCookie();
 	if (getCookie() == undefined)
 	{
