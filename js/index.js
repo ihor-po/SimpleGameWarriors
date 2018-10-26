@@ -147,9 +147,10 @@ function getCookie() {
 //редирект на страницу игры
 function needRedirect()
 {
+	let res = getCookie();
 	if (getCookie() != undefined)
 	{
-		if(localStorage.getItem('login'))
+		if(res['domain'] == DOMAIN)
 		{
 			window.location.replace('game.html');
 		}	
