@@ -4,7 +4,6 @@ let userOption = getCookie();
 localStorage.setItem('saveGame', 1);
 localStorage.setItem('login', userOption['login']);
 localStorage.setItem('team', (userOption['team'] == 'Красненькая') ? 'enemy' : 'friend');
-console.log(localStorage);
 
 let friendDiv = document.getElementById('friend');
 let enemyDiv = document.getElementById('enemy');

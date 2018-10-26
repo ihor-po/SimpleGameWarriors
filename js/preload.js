@@ -167,7 +167,10 @@ function needRedirect()
 {
 	if (getCookie() == undefined)
 	{
-		localStorage.clear();
-		window.location.replace('index.html');
+		if(localStorage.getItem('login'))
+		{
+			localStorage.clear();
+			window.location.replace('index.html');
+		}
 	}
 }

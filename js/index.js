@@ -149,6 +149,9 @@ function needRedirect()
 {
 	if (getCookie() != undefined)
 	{
-		window.location.replace('game.html');
+		if(localStorage.getItem('login'))
+		{
+			window.location.replace('game.html');
+		}	
 	}
 }
