@@ -165,9 +165,10 @@ function getCookie() {
 //Редирект на страницу входа
 function needRedirect()
 {
+	let res = getCookie();
 	if (getCookie() == undefined)
 	{
-		if(localStorage.getItem('login'))
+		if(res['domain'] == DOMAIN)
 		{
 			localStorage.clear();
 			window.location.replace('index.html');
