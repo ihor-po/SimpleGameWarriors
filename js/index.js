@@ -1,5 +1,7 @@
 'use strict'
 
+const DOMAIN  = 'warriors.loc';
+
 needRedirect();
 
 /*
@@ -22,8 +24,6 @@ let teamError = document.getElementById('team__error');
 const LOGIN_REGEX = /^[A-Za-z0-9_-\s]{2,14}$/g;
 const EMAIL_REGEX = /^[0-9a-zA-Z-\._]{1,}@(([a-zA-Z0-9-]{1,}|[а-яА-Я0-9-]{1,})\.)+([a-zA-Z0-9]{2,}|[а-яА-Я0-9-]{2,})$/g;
 const PHONE_REGEX = /^(\+380)\d{2}-\d{3}-\d{2}-\d{2}$/g;
-
-const DOMAIN  = 'warriors.loc';
 
 registerForm.addEventListener("submit", function(e) { actionLogin(e); } );
 

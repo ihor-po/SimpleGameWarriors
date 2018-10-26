@@ -1,5 +1,7 @@
 'use strict'
 
+const DOMAIN  = 'warriors.loc';
+
 needRedirect();
 
 /*
