@@ -203,6 +203,11 @@ function loadSavedGame()
 		enableDisableChatField(true);
 	}
 
+	if (friendHero == null && enemyHero == null)
+	{
+		enableDisableChatField(false);
+	}
+
 	if (localStorage.getItem('newGameBtn'))
 	{
 		newGameBtn.style.display = localStorage.getItem('newGameBtn');
