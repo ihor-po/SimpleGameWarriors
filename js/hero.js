@@ -42,7 +42,6 @@ class Hero extends Human {
  	 //атака врага
  	 atack(enemy)
  	 {
- 	 	console.log(this);
  	 	if (this.PowerIndex > enemy.PowerIndex)
  	 	{
  	 		return 1;
