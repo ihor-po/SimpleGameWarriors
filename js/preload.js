@@ -167,12 +167,9 @@ function needRedirect()
 {
 	const DOMAIN  = 'warriors.loc';
 	let res = getCookie();
-	if (getCookie() == undefined)
+	if (res == undefined)
 	{
-		if(res['domain'] == DOMAIN)
-		{
-			localStorage.clear();
-			window.location.replace('index.html');
-		}
+		localStorage.clear();
+		window.location.replace('index.html');
 	}
 }
