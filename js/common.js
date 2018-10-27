@@ -7,7 +7,7 @@ const MAX_WARRIOR_TYPE = 4;
 const MAX_HERO_LEVEL = 99;
 const MAX_WARRIOR_LEVEL = 150;
 const MAX_HEROS_SKINS = 4;
-const MAX_HEROS_MESSAGES = 13;
+const MAX_HEROS_MESSAGES = 20;
 const HEADER_SIZE = 112;
 
 const IMAGE_WIDTH = 150;
@@ -38,8 +38,15 @@ let herosMessages = [
     'Цой - жив!',
     'У тю тю тю',
     'Семки есть?',
-    'Я тебя, с%ка, найду',
-    'Негони...'
+    'Я тебя, нехороший герой, найду',
+    'Негони...',
+    'А мама знает что ты игрешь?',
+    'Ежик... Ежик... Ты где?',
+    'Ничего,  если я тут потусую?',
+    'Пирожки! Пирожки горячие!',
+    'Кретка - морская',
+    'А мне летать, а мне летать...',
+    'Знаете что? А НИЧЕГО!'
 ];
 
 
